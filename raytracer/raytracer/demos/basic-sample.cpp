@@ -42,18 +42,23 @@ namespace
 
             // Create an animation of a double going from -5.0 to 5.0 in 1 second
             // It is important to write 5.0 and not 5, otherwise it will create an animation of ints instead of doubles
-            auto x_position = animation::animate(-5.0, 5.0, 1_s);
+            //auto x_position = animation::animate(5.0, -5.0, 1_s);
 
             // Create a sphere. It has radius 1 and is centered at (0, 0, 0)
             Primitive primitive = sphere();
+			Primitive primitive2 = sphere();
 
             // Move the sphere. x_position(now) = asks the animation what x at this point in time
-            primitive = translate(Vector3D(x_position(now), 0, 0), primitive);
+            primitive = translate(Vector3D(5, 0, 0), primitive);
+			primitive2 = translate(Vector3D(-5, 0, 0), primitive2);
 
             // Assign a material to the sphere
             primitive = decorate(material, primitive);
+			primitive2 = decorate(material, primitive2);
+			std::vector<Primitive> primitives = { primitive, primitive2};
 
-            return primitive;
+			auto root_union = make_union(primitives);
+			return root_union;
         }
 
         /// <summary>
