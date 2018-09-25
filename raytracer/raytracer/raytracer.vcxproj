@@ -38,7 +38,7 @@
     <ProjectGuid>{91038B33-14FE-4EC4-A761-D26EBB65751D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>raytracer</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -401,6 +401,7 @@
     <ClCompile Include="primitives\transformer-primitive.cpp" />
     <ClCompile Include="primitives\union-primitive.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v0.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v1.cpp" />
     <ClCompile Include="renderers\renderer.cpp" />
     <ClCompile Include="renderers\standard-renderer.cpp" />
     <ClCompile Include="lights\light-ray.cpp" />
@@ -511,6 +512,8 @@
     <ClInclude Include="pipeline\text-writer-consumer.h" />
     <ClInclude Include="pipeline\wif-consumer.h" />
     <ClInclude Include="pipeline\wif-processor.h" />
+    <ClInclude Include="raytracers\ray-tracer-v1.h" />
+    <ClInclude Include="raytracers\ray-tracer.h" />
     <ClInclude Include="raytracers\trace-result.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="imaging\bitmap.h" />
@@ -555,7 +558,6 @@
     <ClInclude Include="primitives\transformer-primitive.h" />
     <ClInclude Include="primitives\union-primitive.h" />
     <ClInclude Include="raytracers\ray-tracer-v0.h" />
-    <ClInclude Include="raytracers\ray-tracer.h" />
     <ClInclude Include="raytracers\ray-tracers.h" />
     <ClInclude Include="raytracers\scene.h" />
     <ClInclude Include="renderers\renderer.h" />

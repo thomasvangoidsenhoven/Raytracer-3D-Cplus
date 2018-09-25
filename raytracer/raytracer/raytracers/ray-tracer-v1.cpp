@@ -13,11 +13,12 @@ TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& sc
 	// If there's a hit, find_first_positive_hit returns true and updates the hit object with information about the hit
 	if (scene.root->find_first_positive_hit(ray, &hit))
 	{
+		
 		// There's been a hit
 		// Fill in TraceResult object with information about the trace
 
 		// This ray tracer always returns white in case of a hit
-		Color hit_color = colors::white();
+		Color hit_color = hit.material->at(hit.local_position).ambient;
 
 		// The hit object contains the group id, just copy it (group ids are important for edge detection)
 		unsigned group_id = hit.group_id;
