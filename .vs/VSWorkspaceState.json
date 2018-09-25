@@ -3,9 +3,9 @@
     "",
     "\\raytracer",
     "\\raytracer\\raytracer",
-    "\\raytracer\\raytracer\\cameras",
-    "\\raytracer\\raytracer\\demos"
+    "\\raytracer\\raytracer\\demos",
+    "\\raytracer\\raytracer\\raytracers"
   ],
-  "SelectedNode": "\\raytracer\\raytracer\\cameras\\perspective-camera.h",
+  "SelectedNode": "\\raytracer\\raytracer\\demos\\demo.cpp",
   "PreviewInSolutionExplorer": false
 }
