@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\raytracer",
+    "\\raytracer\\raytracer",
+    "\\raytracer\\raytracer\\cameras",
+    "\\raytracer\\raytracer\\demos"
+  ],
+  "SelectedNode": "\\raytracer\\raytracer\\cameras\\perspective-camera.h",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,37 @@
+// This function is called for multiple values of "now"
+def scene_at(now)
+{
+  // Create animation: x goes from -10 to +10 in 5 seconds
+  var x = Animations.animate(-10, 10, seconds(5))
+
+  // Create camera at (x[now], 0, 5).
+  // x[now] returns the value of x at the current time in the animation
+  var camera = Cameras.perspective( [ "eye": pos(-5,0,0),
+                                      "look_at": pos(0,0,0),
+                                      "up": vec(0,1,x[now]).normalized() ] )
+
+  // Create material
+  var material = Materials.uniform( [ "ambient": Colors.white(),
+                                      "diffuse": Colors.white() ] )
+
+  // Create decorated sphere
+  var r = decorate(material, sphere())
+  var rr = decorate(material, sphere())
+
+  // Create empty list of lights (we're rendering with v0, which ignores lights, so why bother)
+  var lights = [ ]
+
+  create_scene(camera, union([translate(vec(0,0,2),r),translate(vec(0,0,-2),rr)]), lights)
+}
+
+var renderer = Renderers.standard( [ "width": 250,
+                                     "height": 250,
+                                     "sampler": Samplers.single(),
+                                     "ray_tracer": Raytracers.v0() ] )
+
+pipeline( scene_animation(scene_at, seconds(5)),
+          [ Pipeline.animation(30),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )
