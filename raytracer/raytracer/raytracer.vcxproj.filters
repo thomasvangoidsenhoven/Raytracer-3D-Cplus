@@ -656,9 +656,6 @@
     <ClInclude Include="math\plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raytracers\ray-tracer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="raytracers\ray-tracers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -764,6 +761,12 @@
     <ClInclude Include="raytracers\ray-tracer-v1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="raytracers\ray-tracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+>>>>>>> raytracer-v1
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="debugger-visualizations.natvis" />

@@ -15,7 +15,11 @@ namespace
     struct RaytracerLibrary
     {
         RayTracer v0() const { return raytracer::raytracers::v0(); }
+<<<<<<< HEAD
 		RayTracer v1() const { return raytracer::raytracers::v1(); }
+=======
+        RayTracer v1() const { return raytracer::raytracers::v1(); }
+>>>>>>> raytracer-v1
 
         RayTracer v(int version) const
         {
@@ -57,6 +61,10 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
 #   define BIND(NAME)   module->add(fun(&RaytracerLibrary::NAME), #NAME)
     BIND(v0);
     BIND(v1);
+<<<<<<< HEAD
+=======
+    BIND(v);
+>>>>>>> raytracer-v1
 #   undef BIND
 
     // Expose create_scene under the same name
