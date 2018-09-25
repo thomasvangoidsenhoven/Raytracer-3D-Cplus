@@ -15,9 +15,10 @@ TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& sc
 	{
 		// There's been a hit
 		// Fill in TraceResult object with information about the trace
-
+		Material mat = hit.material;
 		// This ray tracer always returns white in case of a hit
-		Color hit_color = colors::white();
+		Color hit_color = mat->at(hit.local_position).ambient;
+		
 
 		// The hit object contains the group id, just copy it (group ids are important for edge detection)
 		unsigned group_id = hit.group_id;
