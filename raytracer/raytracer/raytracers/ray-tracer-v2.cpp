@@ -18,8 +18,12 @@ TraceResult raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& sc
 		// Fill in TraceResult object with information about the trace
 		Material mat = hit.material;
 		// This ray tracer always returns white in case of a hit
+		
+		Color result = colors::black();
 
-		Color hit_color = hit.material->at(hit.local_position).ambient;
+		result = hit.material->at(hit.local_position).ambient;
+		
+		result += this->process_lights(scene, hit.material->at(hit.local_position), hit,ray);
 
 		// The hit object contains the group id, just copy it (group ids are important for edge detection)
 		unsigned group_id = hit.group_id;
@@ -29,7 +33,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& sc
 		double t = hit.t;
 
 		// Group all this data into a TraceResult object.
-		return TraceResult(hit_color, group_id, ray, t);
+		return TraceResult(result, group_id, ray, t);
 	}
 	else
 	{
@@ -39,6 +43,21 @@ TraceResult raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& sc
 		return TraceResult::no_hit(ray);
 	}
 }
+Color raytracer::raytracers::_private_::RayTracerV2::process_lights(const Scene& scene, const MaterialProperties& properties, const Hit& hit,  const Ray& ray) const
+{
+	Color result = colors::black();
+	for each(LightSource light_source in scene.light_sources) {
+
+
+	}
+
+	return result;
+}
+
+
+
+
+
 
 raytracer::RayTracer raytracer::raytracers::v2()
 {
