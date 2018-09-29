@@ -23,5 +23,10 @@ Material raytracer::materials::pattern2d(math::Function<bool(const Point2D&)> pa
 
 Material raytracer::materials::horizontal_lines(double thickness, Material m1, Material m2)
 {
-    return pattern2d(math::functions::horizontal_lines(thickness), m1, m2);
+	return pattern2d(math::functions::horizontal_lines(thickness), m1, m2);
+}
+
+Material raytracer::materials::vertical_lines(double thickness, Material m1, Material m2)
+{
+	return pattern2d(math::functions::vertical_lines(thickness), m1, m2);
 }
