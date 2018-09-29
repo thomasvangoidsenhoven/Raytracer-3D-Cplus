@@ -85,6 +85,7 @@
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />
     <ClCompile Include="math\functions\vertical-lines-pattern.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -256,5 +257,6 @@
     <ClInclude Include="version.h" />
     <ClInclude Include="raytracers\ray-tracer.h" />
     <ClInclude Include="math\functions\vertical-lines-pattern.h" />
+    <ClInclude Include="raytracers\ray-tracer-v2.h" />
   </ItemGroup>
 </Project>

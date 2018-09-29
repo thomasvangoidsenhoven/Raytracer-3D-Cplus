@@ -90,7 +90,7 @@ namespace
 	{
 	public:
 		PlaneXZImplementation()
-			: CoordinatePlaneImplementation(Vector3D(0, 0, 1))
+			: CoordinatePlaneImplementation(Vector3D(0, 1, 0))
 		{
 			// NOP
 		}
@@ -107,7 +107,7 @@ namespace
 			hit->position = ray.at(hit->t);
 			hit->local_position.xyz = hit->position;
 			hit->local_position.uv = Point2D(hit->position.x(), hit->position.z());
-			hit->normal = ray.origin.z() > 0 ? m_normal : -m_normal;
+			hit->normal = ray.origin.y() > 0 ? m_normal : -m_normal;
 		}
 	};
 
@@ -115,7 +115,7 @@ namespace
 	{
 	public:
 		PlaneYZImplementation()
-			: CoordinatePlaneImplementation(Vector3D(0, 0, 1))
+			: CoordinatePlaneImplementation(Vector3D(1, 0, 0))
 		{
 			// NOP
 		}
@@ -132,7 +132,7 @@ namespace
 			hit->position = ray.at(hit->t);
 			hit->local_position.xyz = hit->position;
 			hit->local_position.uv = Point2D(hit->position.y(), hit->position.z());
-			hit->normal = ray.origin.z() > 0 ? m_normal : -m_normal;
+			hit->normal = ray.origin.x() > 0 ? m_normal : -m_normal;
 		}
 	};
 }
