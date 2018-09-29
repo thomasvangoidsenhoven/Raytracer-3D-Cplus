@@ -16,9 +16,9 @@ namespace raytracer
 				TraceResult trace(const Scene&, const math::Ray&) const override;
 
 			private:
-				Color process_lights(const Scene&, const MaterialProperties&, const Hit&, const Ray&) const ;
-				Color process_light_source(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, LightSource&) const ;
-				Color process_light_ray(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const ;
+				Color process_lights(const Scene&, const MaterialProperties&, const Hit&, const Ray&) const;
+				Color process_light_source(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, LightSource&) const;
+				Color process_light_ray(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const;
 				Color compute_diffuse(const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const;
 			};
 		

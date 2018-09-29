@@ -47,11 +47,42 @@ Color raytracer::raytracers::_private_::RayTracerV2::process_lights(const Scene&
 {
 	Color result = colors::black();
 	for each(LightSource light_source in scene.light_sources) {
-
+		result += process_light_source(scene, properties, hit, ray, light_source);
 
 	}
 
 	return result;
+}
+
+Color raytracer::raytracers::_private_::RayTracerV2::process_light_source(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const math::Ray& ray, LightSource& lightSource) const
+{
+	Color result = colors::black();
+	for each(LightRay lightray in lightSource->lightrays_to) {
+		result += process_light_ray(scene, properties, hit, ray, lightray);
+	}	
+
+	return result;
+}
+
+Color raytracer::raytracers::_private_::RayTracerV2::process_light_ray(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const math::Ray& ray, const LightRay& lightRay) const
+{
+	Color result = colors::black();
+	result += compute_diffuse(properties, hit, ray, lightRay);
+	return result;
+}
+
+Color raytracer::raytracers::_private_::RayTracerV2::compute_diffuse(const MaterialProperties& properties, const Hit& hit, const math::Ray& ray, const LightRay& lightRay) const
+{
+	Color lightRayColor = lightRay.color;
+	Point3D lightRayOrigin = lightRay.ray.origin;
+	Point3D hitPosition = hit.position;
+	Color materialColor = properties.diffuse;
+
+	//calculate the angle
+	auto angle = (lightRayOrigin - hitPosition).normalized.dot(hit.normal);
+	
+	if (angle > 0) return lightRayColor*materialColor*angle;
+	return colors::black();
 }
 
 
