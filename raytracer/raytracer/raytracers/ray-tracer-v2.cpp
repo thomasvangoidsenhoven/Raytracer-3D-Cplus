@@ -54,10 +54,10 @@ Color raytracer::raytracers::_private_::RayTracerV2::process_lights(const Scene&
 	return result;
 }
 
-Color raytracer::raytracers::_private_::RayTracerV2::process_light_source(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const math::Ray& ray, LightSource& lightSource) const
+Color raytracer::raytracers::_private_::RayTracerV2::process_light_source(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const math::Ray& ray, LightSource lightSource) const
 {
 	Color result = colors::black();
-	for each(LightRay lightray in lightSource->lightrays_to) {
+	for each(LightRay lightray in lightSource->lightrays_to(hit.position)) {
 		result += process_light_ray(scene, properties, hit, ray, lightray);
 	}	
 
@@ -78,8 +78,9 @@ Color raytracer::raytracers::_private_::RayTracerV2::compute_diffuse(const Mater
 	Point3D hitPosition = hit.position;
 	Color materialColor = properties.diffuse;
 
+	Vector3D tussenstap = (lightRayOrigin - hitPosition).normalized();
 	//calculate the angle
-	auto angle = (lightRayOrigin - hitPosition).normalized.dot(hit.normal);
+	auto angle = tussenstap.dot(hit.normal);
 	
 	if (angle > 0) return lightRayColor*materialColor*angle;
 	return colors::black();
