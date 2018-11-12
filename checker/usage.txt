@@ -1,0 +1,4 @@
+Open team-data.rb and add which extensions each team member made.
+Assuming you have Ruby installed, you can run the script using
+
+  ./check.rb
