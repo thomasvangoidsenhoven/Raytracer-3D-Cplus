@@ -10,7 +10,7 @@
 $extensions = []
 $team = {}
 
-MINIMAL_REQUIREMENTS_BY_DIFFICULTY = [5, 4, 3, 2, 1]
+MINIMAL_REQUIREMENTS_BY_DIFFICULTY = [5, 4, 3, 1, 1]
 
 
 Extension = Struct.new(:name, :difficulty, :allow_multiple, :mutually_exclusive) do
@@ -148,24 +148,34 @@ end
 
 extension :BasicSample, 1, allow_multiple: true
 extension :BasicScripting, 1, allow_multiple: true
+
+# Ray tracers
 extension :RayTracerV1, 1, allow_multiple: true
 extension :RayTracerV2, 2
 extension :RayTracerV3, 2
 extension :RayTracerV4, 2
 extension :RayTracerV5, 3
 extension :RayTracerV6, 4
+
+# Samplers
 extension :RandomSampler, 2
 extension :StratifiedSampler, 2
 extension :JitteredSampler, 2
 extension :HalfJitteredSampler, 2
 extension :NRooksSampler, 3
-extension :MultijitteredSampler, 4
+extension :MultijitteredSampler, 3
+
+# Cameras
 extension :DepthOfFieldCamera, 3
 extension :FisheyeCamera, 4
 extension :OrthographicCamera, 4
+
+# Lights
 extension :DirectionalLight, 2
 extension :SpotLight, 3
 extension :AreaLight, 2
+
+# Materials
 extension :Voronoi2D, 5
 extension :Voronoi3D, 5
 extension :MaterialDalmatian2D, 5
@@ -189,6 +199,8 @@ extension :MaterialTranslate2D, 3
 extension :MaterialTranslate3D, 3
 extension :MaterialRotate2D, 3
 extension :MaterialRotate3D, 3
+
+# Primitives
 extension :PlaneXZ, 1
 extension :PlaneYZ, 1
 extension :PlaneXZOptimized, 1
@@ -218,35 +230,45 @@ extension :BoundingBox, 2
 extension :Cropper, 3
 extension :CropperOptimized, 2
 extension :Bumpifier, 5
-extension :Intersection, 5
+extension :Intersection, 4
 extension :IntersectionOptimized, 2
-extension :Difference, 5
+extension :Difference, 4
 extension :DifferenceOptimized, 2
 extension :PrimitiveScaling, 1
 extension :PrimitiveRotationX, 1
 extension :PrimitiveRotationY, 1
 extension :PrimitiveRotationZ, 1
+extension :Mesh, 5, allow_multiple: true
+
+# Renderers
 extension :Group, 2
 extension :Edge, 5
 extension :Cartoon, 3
-extension :ParallelScheduler, 4, allow_multiple: true
+
+# Performance
+extension :ParallelScheduler, 3, allow_multiple: true
+
+# Pipeline
 extension :MotionBlur, 4
 extension :Bmp, 2
 extension :Ppm, 3
+extension :Studio, 2
+
+# Animation
 extension :EasingLibrary, 2
 extension :Bounce, 3
 extension :Elastic, 3
-extension :Quadratic, 4
-extension :Cubic, 4
-extension :Quintic,4 
+extension :Quadratic, 3
+extension :Cubic, 3
+extension :Quintic,3 
 extension :PointAnimation, 2
 extension :AngleAnimation, 2
 extension :Quaternions, 2
 extension :CircularAnimation, 2
-extension :Lissajous, 4
+extension :Lissajous, 3
 extension :Cyclic, 3
 extension :Slicer, 3
-extension :Mesh, 5, allow_multiple: true
+
 
 
 mutually_exclusive Bounce, Elastic
@@ -266,6 +288,7 @@ mutually_exclusive PointAnimation, AngleAnimation
 
 load 'team-data.rb'
 
+puts "Version 3.1"
 puts "*** Warning: this script might still change, but only in minor ways"
 
 check_mutually_exclusive
