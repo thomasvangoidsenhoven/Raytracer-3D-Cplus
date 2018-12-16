@@ -37,8 +37,7 @@ imaging::Color raytracer::raytracers::_private_::RayTracerV3::compute_specular(c
 	Vector3D lightDirection = (hitPosition - rayOrigin).normalized();
 	Vector3D reflectionDirection = lightDirection.reflect_by(hit.normal);
 	
-	Vector3D tussenstap = (eyePosition - hitPosition);
-	 tussenstap = tussenstap.normalized();
+	Vector3D tussenstap = (eyePosition - hitPosition).normalized();
 	double cos = tussenstap.dot(reflectionDirection);
 	if (cos > 0) return rayColor * specularColor * pow(cos, specularExponent);
 	return colors::black();

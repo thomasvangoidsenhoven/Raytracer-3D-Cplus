@@ -6,7 +6,7 @@
 #include "materials/material-properties.h"
 #include "lights/light-ray.h"
 #include "lights/light-source.h"
-#include "ray-tracer-v2.h"
+#include "ray-tracer-v3.h"
 
 
 namespace raytracer
@@ -15,12 +15,12 @@ namespace raytracer
 	{
 		namespace _private_
 		{
-			class RayTracerV3 : public RayTracerV2
+			class RayTracerV4 : public RayTracerV3
 			{
 
+			
 			protected:
 				virtual imaging::Color process_light_ray(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const;
-				virtual imaging::Color compute_specular(const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const;
 			};
 
 
@@ -29,6 +29,6 @@ namespace raytracer
 		/// <summary>
 		/// Creates simplest ray tracer.
 		/// </summary>
-		RayTracer v3();
+		RayTracer v4();
 	}
 }
