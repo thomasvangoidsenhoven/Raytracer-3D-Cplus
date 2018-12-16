@@ -87,6 +87,7 @@
     <ClCompile Include="math\functions\vertical-lines-pattern.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v2.cpp" />
     <ClCompile Include="math\Quaternion.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -260,5 +261,6 @@
     <ClInclude Include="math\functions\vertical-lines-pattern.h" />
     <ClInclude Include="raytracers\ray-tracer-v2.h" />
     <ClInclude Include="math\Quaternion.h" />
+    <ClInclude Include="raytracers\ray-tracer-v3.h" />
   </ItemGroup>
 </Project>
