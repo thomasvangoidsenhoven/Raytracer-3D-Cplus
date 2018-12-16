@@ -1,0 +1,60 @@
+def scene_at(now)
+{
+  var camera = Cameras.perspective( [ "eye": pos(0,0,5),
+                                      "look_at": pos(0,0,0) ] )
+
+  var floor_material = Materials.uniform( [ "ambient": Colors.white() * 1,
+                                            "diffuse": Colors.white() * 0.8,
+                                            "reflectivity": 0.5 ] )
+
+  var left_wall_material = Materials.uniform( [ "ambient": Colors.red() * 1,
+                                                "diffuse": Colors.red() * 0.8 ] )
+
+  var right_wall_material = Materials.uniform( [ "ambient": Colors.green() * 1,
+                                                 "diffuse": Colors.green() * 0.8 ] )
+
+  var back_wall_material = Materials.uniform( [ "ambient": Colors.blue() * 1,
+                                                "diffuse": Colors.blue() * 0.8 ] )
+
+  var ceiling_material = floor_material
+
+  var sphere_material = Materials.uniform( [ "ambient": Colors.blue() * 0.5,
+                                             "diffuse": Colors.blue() * 0.8,
+                                             "specular": Colors.white() * 0.8,
+                                             "specular_exponent": 10,
+                                             "transparency": 0.7,
+                                             "refractive_index": 2.5 ] )
+
+  var small_sphere_material = Materials.uniform( [ "ambient": Colors.white() * 1,
+                                                   "diffuse": Colors.white() * 0.8,
+                                                   "reflectivity": 0.8 ] )
+
+
+  var primitives = []
+  primitives.push_back( translate(vec(0,-2,0), decorate(floor_material, xz_plane())) )
+  primitives.push_back( translate(vec(0,2,0), decorate(ceiling_material, xz_plane())) )
+  primitives.push_back( translate(vec(-2,0,0), decorate(left_wall_material, yz_plane())) )
+  primitives.push_back( translate(vec(2,0,0), decorate(right_wall_material, yz_plane())) )
+  primitives.push_back( translate(vec(0,0,-2), decorate(back_wall_material, xy_plane())) )
+
+
+
+  var root = union(primitives)
+
+  var lights = [ Lights.omnidirectional( pos(0,1.9,0), Colors.white() ) ]
+
+  create_scene(camera, root, lights)
+}
+
+var raytracer   = Raytracers.v1()
+var renderer    = Renderers.standard( [ "width": 500,
+                                        "height": 500,
+                                        "sampler": Samplers.single(),
+                                        "ray_tracer": Raytracers.v1() ] )
+
+pipeline( scene_animation(scene_at, seconds(5)),
+          [ Pipeline.animation(30),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )
