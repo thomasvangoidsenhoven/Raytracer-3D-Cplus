@@ -1,28 +1,25 @@
-team_member 'Nick' do
+team_member 'Wannes' do
   extension BasicSample
   extension BasicScripting
   
   extension RayTracerV1
-  extension RayTracerV2
-  extension RayTracerV3
+  extension PlaneXZ
+  extension Scaling
 
-  extension PrimitiveRotationX
 end
 
-team_member 'Kurt' do
+team_member 'Thomas' do
   extension BasicSample
   extension BasicScripting
+  extension RayTracerV1
   
-  extension RayTracerV4
-  extension RayTracerV5
+  extension PlaneYZ
+  extension VerticalLines
+  extension RayTracerV2
+
 end
 
-team_member 'Dale' do
-  extension BasicSample
-  extension BasicScripting
 
-  extension RayTracerV6
-end
 
 
 
