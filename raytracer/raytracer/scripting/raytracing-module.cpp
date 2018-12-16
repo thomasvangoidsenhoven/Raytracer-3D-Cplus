@@ -17,6 +17,7 @@ namespace
         RayTracer v0() const { return raytracer::raytracers::v0(); }
         RayTracer v1() const { return raytracer::raytracers::v1(); }
 		RayTracer v2() const { return raytracer::raytracers::v2(); }
+		RayTracer v3() const { return raytracer::raytracers::v3(); }
 
         RayTracer v(int version) const
         {
@@ -59,6 +60,7 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
     BIND(v0);
     BIND(v1);
 	BIND(v2);
+	BIND(v3);
     BIND(v);
 
 #   undef BIND
