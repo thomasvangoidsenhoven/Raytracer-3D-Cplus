@@ -368,7 +368,7 @@
     <ClCompile Include="math\functions\vertical-lines-pattern.cpp" />
     <ClCompile Include="math\plane.cpp" />
     <ClCompile Include="math\quantize.cpp" />
-    <ClCompile Include="math\Quaternion.cpp" />
+    <ClCompile Include="math\quaternion.cpp" />
     <ClCompile Include="math\transformation-matrices.cpp" />
     <ClCompile Include="performance\performance.cpp" />
     <ClCompile Include="pipeline\animation-processor.cpp" />
@@ -501,7 +501,7 @@
     <ClInclude Include="math\functions\vertical-lines-pattern.h" />
     <ClInclude Include="math\plane.h" />
     <ClInclude Include="math\quantize.h" />
-    <ClInclude Include="math\Quaternion.h" />
+    <ClInclude Include="math\quaternion.h" />
     <ClInclude Include="math\transformation-matrices.h" />
     <ClInclude Include="math\vector.h" />
     <ClInclude Include="math\point.h" />
