@@ -31,6 +31,7 @@ namespace tasks
 
         tasks::schedulers::_private_::TaskSchedulerImplementation* operator ->() const
         {
+		
             return m_implementation.get();
         }
 

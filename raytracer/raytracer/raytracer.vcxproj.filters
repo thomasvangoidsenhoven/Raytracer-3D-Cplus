@@ -89,6 +89,7 @@
     <ClCompile Include="raytracers\ray-tracer-v3.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v4.cpp" />
     <ClCompile Include="math\quaternion.cpp" />
+    <ClCompile Include="tasks\parallel-task-scheduler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -264,5 +265,6 @@
     <ClInclude Include="raytracers\ray-tracer-v3.h" />
     <ClInclude Include="raytracers\ray-tracer-v4.h" />
     <ClInclude Include="math\quaternion.h" />
+    <ClInclude Include="tasks\parallel-task-scheduler.h" />
   </ItemGroup>
 </Project>

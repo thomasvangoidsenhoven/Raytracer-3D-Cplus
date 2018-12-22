@@ -13,7 +13,6 @@
 
 using namespace raytracer;
 
-
 namespace
 {
     void render_script(const std::string& filename)
