@@ -42,7 +42,7 @@ Sampler demos::Demo::create_sampler()
 
 tasks::TaskScheduler demos::Demo::create_scheduler()
 {
-    return tasks::schedulers::serial();
+    return tasks::schedulers::parallel();
 }
 
 Animation<std::shared_ptr<Scene>> demos::Demo::create_scene_animation()
