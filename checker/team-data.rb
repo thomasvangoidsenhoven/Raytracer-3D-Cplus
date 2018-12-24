@@ -129,6 +129,4 @@ end
 # extension Lissajous
 # extension Cyclic
 # extension Slicer
-# extension MeshReading
-# extension MeshOptimizing
-# extension MeshRendering
+# extension Mesh
