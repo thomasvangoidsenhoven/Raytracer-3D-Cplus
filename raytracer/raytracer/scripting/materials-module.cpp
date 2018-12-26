@@ -51,7 +51,17 @@ namespace
 		{
 			return raytracer::materials::vertical_lines(thickness, m1, m2);
 		}
-    };
+
+		Material checkered2d(double thickness, Material m1, Material m2) const
+		{
+			return raytracer::materials::checkered2d(thickness, m1, m2);
+		}
+
+		Material checkered2d_default(Material m1, Material m2) const
+		{
+			return raytracer::materials::checkered2d(0.1, m1, m2);
+		}
+	};
 }
 
 ModulePtr raytracer::scripting::_private_::create_materials_module()
@@ -76,7 +86,9 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(uniform);
     BIND_AS(uniform_by_map, uniform);
     BIND(horizontal_lines);
-    BIND(vertical_lines);
+	BIND(vertical_lines);
+	BIND(checkered2d);
+	BIND_AS(checkered2d_default, checkered2d);
 #   undef BIND
 #   undef BIND_AS
 

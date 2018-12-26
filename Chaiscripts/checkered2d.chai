@@ -1,0 +1,33 @@
+def material(color) {
+  Materials.uniform( [ "ambient": color * 0.1,
+                       "diffuse": color ] )
+}
+
+var camera = Cameras.perspective( [ "eye": pos(0,0,10),
+                                    "look_at": pos(0,0,0) ] )
+
+var white = material(Colors.white())
+var black = material(Colors.white() * 0.2)
+var material = Materials.checkered2d(black, white)
+
+var root = union( [ decorate( Materials.scale(0.1, 0.2, material), sphere() ),
+                    decorate( material, translate( vec(0, -1, 0), xz_plane() ) ) ] )
+
+var lights = [ Lights.omnidirectional( pos(0,0,5), Colors.white() ) ]
+
+var scene = create_scene(camera, root, lights)
+
+
+var raytracer   = Raytracers.v3()
+
+var renderer    = Renderers.standard( [ "width": 500,
+                                       "height": 500,
+                                       "sampler": Samplers.multijittered(4),
+                                       "ray_tracer": raytracer ] )
+
+pipeline( scene,
+          [ Pipeline.animation(30),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+Pipeline.stdout() ] )
