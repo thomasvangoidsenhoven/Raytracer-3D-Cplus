@@ -92,6 +92,7 @@
     <ClCompile Include="tasks\parallel-task-scheduler.cpp" />
     <ClCompile Include="math\functions\checkered-pattern.cpp" />
     <ClCompile Include="primitives\square-primitive.cpp" />
+    <ClCompile Include="primitives\cube.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -270,5 +271,6 @@
     <ClInclude Include="tasks\parallel-task-scheduler.h" />
     <ClInclude Include="math\functions\checkered-pattern.h" />
     <ClInclude Include="primitives\square-primitive.h" />
+    <ClInclude Include="primitives\cube.h" />
   </ItemGroup>
 </Project>
