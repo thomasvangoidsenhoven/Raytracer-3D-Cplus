@@ -16,9 +16,9 @@ def scene_at(now)
 
   var plane_material = Materials.checkered2d( white, black )
 
-  var root = union( [ decorate(square_material, translate(vec(0,1,1),xy_square())),
-  decorate(square_material, translate(vec(0,1,1),xz_square())),
-  decorate(square_material, translate(vec(1,1,1),yz_square())),
+  var root = union( [ decorate(square_material, translate(vec(1,1,0),xy_square())),
+  decorate(square_material, translate(vec(1.5,1,2.5),xz_square())),
+  decorate(square_material, translate(vec(0,1,1),yz_square())),
                       decorate(plane_material, translate(vec(0,-2,0), xz_plane())) ] )
 
   var lights = [ Lights.omnidirectional( pos(5,5,5), Colors.white() ) ]
@@ -33,7 +33,7 @@ var renderer = Renderers.standard( [ "width": 500,
                                      "sampler": Samplers.single(),
                                      "ray_tracer": raytracer ] )
 
-pipeline( scene_animation(scene_at, seconds(5)),
+pipeline( scene_animation(scene_at, seconds(1)),
           [ Pipeline.animation(30),
             Pipeline.renderer(renderer),
             Pipeline.wif(),
