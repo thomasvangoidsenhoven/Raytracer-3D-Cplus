@@ -1,35 +1,24 @@
-# File.stream!("D:\\bunny.mesh") |>
-# Stream.map( &(String.replace(&1, "\n", "")) ) |>
-# Stream.with_index |>
-# Enum.each( fn({contents, line_num}) ->
-#   IO.puts "#{line_num + 1} #{contents}"
+require IEx;
+
+#check if all triangles have 3 points
+# Enum.filter(data.triangles, fn x-> tuple_size(x) != 3 end)
+# #check if all points exist
+# Enum.filter(data.triangles, fn {p1,p2,p3}-> 
+#     !(Map.has_key?(vertices, p1) and
+#     Map.has_key?(vertices, p2) and
+#     Map.has_key?(vertices, p3))
 # end)
 
-# {:ok, file} = File.open("D:\\bunny.mesh", [:read, :write])
-# IO.read(file, :all) |> IO.inspect
 
-# If one file can contain multiple meshes
-# %{
-#     status: triangles / xyz_with_index / nothing
-#     0 -> %{
-#         vertices: 3, 
-#         triangles: 1,
-#         xyz_with_index: %{0 -> {x,y,z}, 1-> {x,y,z}, ...},
-#         triangles: [{i1, i2, i3}, {i1, i2, i3}]
-#     }
-# }
+# Enum.filter(t |> Tuple.to_list, fn {p1,p2,p3}-> 
+#     !(Map.has_key?(vertices, p1) and
+#     Map.has_key?(vertices, p2) and
+#     Map.has_key?(vertices, p3))
+# end)
 
-# First, lets only do it for one mesh
-#         %{
-    #         number_vertices: 3, 
-    #         number_triangles: 1,
-    #         xyz_with_index: %{0 -> {x,y,z}, 1-> {x,y,z}, ...},
-    #         triangles: [{i1, i2, i3}, {i1, i2, i3}]
-    #     }
 
-# text =  File.read! "D:\\bunny.mesh"
 defmodule MeshReader do
-    def readValues(filename \\ "D:\\lucy.mesh") do
+    def readValues(filename \\ "D:\\bunny.mesh") do
         # text = "1\n0 0 0\n1.5 2.1 3.2\n-1.2 1.1 5.6\n1\n0 1 2"
         text =  File.read! filename
         list = String.split(text, "\n")
@@ -84,5 +73,200 @@ defmodule MeshReader do
     end
     def processLine(_,_,_), do: :skip
 end
-:observer.start
-IO.inspect MeshReader.readValues()
+
+
+defmodule Trianglesorter do
+    def sort_triangle_arr(triangles, vertices, axis) when is_number(axis) and axis<3 do
+        Enum.sort_by(triangles, 
+            fn triangle -> 
+                sorted_triangle_points = Trianglesorter.sort_tp_by_axis(triangle, vertices, axis)
+                first_sorted_point = elem(sorted_triangle_points,0)
+                point_data = Map.get(vertices, first_sorted_point)
+                elem(point_data,axis) |> Float.parse() |> elem(0) 
+            end)
+
+    end
+
+    def sort_tp_by_axis(triangle, vertices, axis) when is_number(axis) and axis < 3 do
+        Tuple.to_list(triangle) |> Enum.sort_by(
+            &( 
+                elem(Map.get(vertices,&1), axis) |> String.to_float() 
+            )) |> List.to_tuple()
+    end 
+
+    # def sort_tp_by_axis(a,b,c) when is_atom(c), do: sort_tp_by_axis(a,b,"0"|>String.to_integer)
+
+    def get_min_max_from_triangles(triangles, vertices) do
+        triangles = for triangle <- triangles, into: [] do
+            Tuple.to_list triangle
+        end
+        triangles = List.flatten triangles
+        start = %{
+            minx: nil,
+            miny: nil,
+            minz: nil,
+            maxx: nil,
+            maxy: nil,
+            maxz: nil,
+        }
+        Enum.reduce(triangles, start, fn x,acc -> 
+            triangle_x = elem(Map.get(vertices, x),0) |> String.to_float
+            triangle_y = elem(Map.get(vertices, x),1) |> String.to_float
+            triangle_z = elem(Map.get(vertices, x),2) |> String.to_float
+            minx = acc.minx
+            maxx = acc.maxx
+            miny = acc.miny
+            maxy = acc.maxy
+            minz = acc.minz
+            maxz = acc.maxz
+            minx = cond do
+                minx == nil -> nil
+                is_binary(minx) -> String.to_float(minx)  
+                is_number(minx) -> minx 
+            end
+            maxx = cond do
+                maxx == nil -> nil
+                is_binary(maxx) -> String.to_float(maxx)  
+                is_number(maxx) -> maxx 
+            end
+            miny = cond do
+                miny == nil -> nil
+                is_binary(miny) -> String.to_float(miny)  
+                is_number(miny) -> miny 
+            end
+            maxy = cond do
+                maxy == nil -> nil
+                is_binary(maxy) -> String.to_float(maxy)  
+                is_number(maxy) -> maxy 
+            end
+            minz = cond do
+                minz == nil -> nil
+                is_binary(minz) -> String.to_float(minz)  
+                is_number(minz) -> minz 
+            end
+            maxz = cond do
+                maxz == nil -> nil
+                is_binary(maxz) -> String.to_float(maxz)  
+                is_number(maxz) -> maxz 
+            end
+        
+            acc = cond do
+                minx == nil -> %{acc | minx: triangle_x}
+                triangle_x <= minx -> %{acc | minx: triangle_x} 
+                true -> acc   
+            end
+            acc = cond do
+                maxx == nil -> %{acc | maxx: triangle_x}
+                triangle_x > maxx -> %{acc | maxx: triangle_x} 
+                true -> acc   
+            end
+            acc = cond do
+                miny == nil -> %{acc | miny: triangle_y}
+                triangle_y <= miny -> %{acc | miny: triangle_y}  
+                true -> acc     
+            end
+            acc = cond do
+                maxy == nil -> %{acc | maxy: triangle_y}
+                triangle_y > maxy -> %{acc | maxy: triangle_y}    
+                true -> acc   
+            end
+            acc = cond do
+                minz == nil -> %{acc | minz: triangle_z}
+                triangle_z <= minz -> %{acc | minz: triangle_z} 
+                true -> acc      
+            end
+            acc = cond do
+                maxz == nil -> %{acc | maxz: triangle_z}
+                triangle_z > maxz -> %{acc | maxz: triangle_z}  
+                true -> acc     
+            end
+            acc
+        end)
+    end
+
+    def print_tp(triangle, vertices) do
+        x = elem(triangle, 0)
+        y = elem(triangle, 1)
+        z = elem(triangle, 2)
+        {x1,x2,x3} = Map.get(vertices, x)
+        {y1,y2,y3} = Map.get(vertices, y)
+        {z1,z2,z3} = Map.get(vertices, z)
+        IO.puts "p1 = \t x:#{x1}\ty:#{x2}\tz:#{x3}\n"<>
+            "p2 = \t x:#{y1}\ty:#{y2}\tz:#{y3}\n"<>
+            "p3 = \t x:#{z1}\ty:#{z2}\tz:#{z3}\t\n\n"
+    end
+end
+
+defmodule MeshOptimizer do
+    def optimizeData(data) when data |> is_map do
+        optimized = %{
+            bboxes: %{},
+            xyz_with_index: data.xyz_with_index,
+            tasks: [box: %{id: 0,parent: nil, triangles: data.triangles}]
+        }
+        bboxCreator(optimized)
+    end
+
+    defp find_dimensions(triangles, vertices) do
+        t = Trianglesorter.get_min_max_from_triangles(triangles, vertices)
+        diffx = t.maxx - t.minx
+        diffy = t.maxy - t.miny
+        diffz = t.maxz - t.minz
+        {diffx,diffy,diffz}
+    end
+
+    defp find_largest_axis(triangles, vertices) do
+        {dx,dy,dz} = find_dimensions(triangles, vertices)
+        cond do
+            (dx >= dy) && (dx >=dz) -> 0
+            (dy >= dx) && (dy >=dz) -> 1
+            (dz >= dx) && (dz >=dy) -> 2
+        end
+    end
+
+    def bboxCreator(%{bboxes: boxes, tasks: []}= data) do
+        data
+    end
+    # When there is no parent
+    def bboxCreator(%{bboxes: boxes, tasks: [box: %{id: 0, parent: nil, triangles: triangles}] = tasks} =data)  when length(tasks) == 1 do
+        [box: box] = data.tasks
+        cond do
+            length(triangles)<=150 -> 
+                %{data | bboxes: %{box.id => box}}
+            length(triangles)>150 ->
+                axis = find_largest_axis(triangles, data.xyz_with_index)
+                sorted = Trianglesorter.sort_triangle_arr(triangles, data.xyz_with_index, axis)
+                median = (length(triangles) / 2) |> round
+                p1 = Enum.slice triangles, 0, median
+                p2 = Enum.slice triangles, median..-1
+                task1 = %{id: 1, parent: box.id, triangles: p1}
+                task2 = %{id: 2, parent: box.id, triangles: p2}
+                bboxCreator(%{data | tasks: [task1, task2], bboxes: Map.put(boxes, box.id, Map.delete(box, :triangles))})
+        end
+    end
+    # Normal iteration
+    def bboxCreator(%{bboxes: boxes, tasks: [current_task | remainder]} =data) do
+        triangles = current_task.triangles
+        cond do
+            length(triangles)<=150 ->
+                updated_bboxes= Map.put(boxes, current_task.id, current_task)
+                bboxCreator(%{data | tasks: remainder, bboxes: updated_bboxes})
+            length(triangles)>150 -> 
+                axis = find_largest_axis(triangles, data.xyz_with_index)
+                sorted = Trianglesorter.sort_triangle_arr(triangles, data.xyz_with_index, axis)
+                median = (length(triangles) / 2) |> round
+                p1 = Enum.slice triangles, 0, median
+                p2 = Enum.slice triangles, median..-1
+                # IEx.pry
+                index = length(Map.keys(boxes)) + length(data.tasks)
+                task1 = %{id: index+1, parent: current_task.id, triangles: p1}
+                task2 = %{id: index+2, parent: current_task.id, triangles: p2}
+                cleaned_task =  Map.delete(current_task, :triangles)
+                bboxCreator(%{data | tasks: [task1, task2 | remainder], bboxes: Map.put(boxes, current_task.id, cleaned_task)})
+        end
+    end
+end
+
+data =  MeshReader.readValues()
+vertices = data.xyz_with_index
+temp = MeshOptimizer.optimizeData data
