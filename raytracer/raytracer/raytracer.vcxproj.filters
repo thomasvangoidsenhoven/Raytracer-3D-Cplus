@@ -93,6 +93,7 @@
     <ClCompile Include="math\functions\checkered-pattern.cpp" />
     <ClCompile Include="primitives\square-primitive.cpp" />
     <ClCompile Include="primitives\cube.cpp" />
+    <ClCompile Include="primitives\boundingbox_primitive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -273,5 +274,6 @@
     <ClInclude Include="primitives\square-primitive.h" />
     <ClInclude Include="primitives\cube.h" />
     <ClInclude Include="json\json.hpp" />
+    <ClInclude Include="primitives\boundingbox_primitive.h" />
   </ItemGroup>
 </Project>

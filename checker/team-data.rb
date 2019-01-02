@@ -1,14 +1,19 @@
 team_member 'Wannes' do
   extension BasicSample
   extension BasicScripting
-  
   extension RayTracerV1
   extension PlaneXZ
-  extension Scaling
-  extension RayTracerV3
   extension SquareXY
-  extension MaterialCheckered2D
   extension SquareYZ
+  extension Scaling
+  
+  extension RayTracerV3
+  extension MaterialCheckered2D
+  extension BoundingBox
+  extension Triangle
+  
+  extension Mesh
+  
 
 end
 
@@ -16,13 +21,17 @@ team_member 'Thomas' do
   extension BasicSample
   extension BasicScripting
   extension RayTracerV1
-  
   extension PlaneYZ
   extension SquareXZ
+  
   extension VerticalLines
   extension RayTracerV2
+  extension RayTraverV4
   extension Cube
+  
   extension ParallelScheduler
+  
+  extension Mesh
 end
 
 

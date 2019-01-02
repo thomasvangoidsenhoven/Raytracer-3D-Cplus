@@ -16,3 +16,11 @@ math::Box raytracer::primitives::BoundingBoxAcceleratorImplementation::bounding_
 }
 
 
+
+Primitive raytracer::primitives::bounding_box_accelerator(Primitive prim)
+{
+	return Primitive(std::make_shared<BoundingBoxAcceleratorImplementation>(prim));
+}
+
+
+

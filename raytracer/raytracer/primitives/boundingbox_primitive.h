@@ -15,9 +15,8 @@ namespace raytracer {
 			math::Box bounding_box() const override;
 		};
 
-		Primitive raytracer::primitives::bounding_box_accelerator(Primitive prim)
-		{
-			return Primitive(std::make_shared<BoundingBoxAcceleratorImplementation>(prim));
-		}
+		Primitive bounding_box_accelerator(Primitive);
+
+		
 	}
 }
