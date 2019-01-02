@@ -5,6 +5,10 @@ team_member 'Wannes' do
   extension RayTracerV1
   extension PlaneXZ
   extension Scaling
+  extension RayTracerV3
+  extension SquareXY
+  extension MaterialCheckered2D
+  extension SquareYZ
 
 end
 
@@ -14,9 +18,11 @@ team_member 'Thomas' do
   extension RayTracerV1
   
   extension PlaneYZ
+  extension SquareXZ
   extension VerticalLines
   extension RayTracerV2
-
+  extension Cube
+  extension ParallelScheduler
 end
 
 

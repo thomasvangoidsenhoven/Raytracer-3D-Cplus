@@ -1,22 +1,3 @@
-require IEx;
-
-#check if all triangles have 3 points
-# Enum.filter(data.triangles, fn x-> tuple_size(x) != 3 end)
-# #check if all points exist
-# Enum.filter(data.triangles, fn {p1,p2,p3}-> 
-#     !(Map.has_key?(vertices, p1) and
-#     Map.has_key?(vertices, p2) and
-#     Map.has_key?(vertices, p3))
-# end)
-
-
-# Enum.filter(t |> Tuple.to_list, fn {p1,p2,p3}-> 
-#     !(Map.has_key?(vertices, p1) and
-#     Map.has_key?(vertices, p2) and
-#     Map.has_key?(vertices, p3))
-# end)
-
-
 defmodule MeshReader do
     def readValues(filename \\ "D:\\bunny.mesh") do
         # text = "1\n0 0 0\n1.5 2.1 3.2\n-1.2 1.1 5.6\n1\n0 1 2"
@@ -257,7 +238,6 @@ defmodule MeshOptimizer do
                 median = (length(triangles) / 2) |> round
                 p1 = Enum.slice triangles, 0, median
                 p2 = Enum.slice triangles, median..-1
-                # IEx.pry
                 index = length(Map.keys(boxes)) + length(data.tasks)
                 task1 = %{id: index+1, parent: current_task.id, triangles: p1}
                 task2 = %{id: index+2, parent: current_task.id, triangles: p2}
@@ -267,6 +247,32 @@ defmodule MeshOptimizer do
     end
 end
 
-data =  MeshReader.readValues()
-vertices = data.xyz_with_index
-temp = MeshOptimizer.optimizeData data
+defmodule MeshWriter do
+    def writeToFile(infile, outfile) when is_binary(infile) and is_binary(outfile) do
+        
+    end
+
+    def writeToFile() do
+        data =  MeshReader.readValues()
+        temp = MeshOptimizer.optimizeData data
+        newdata = transformTrianglePointsInBoxes(temp)
+        Map.delete(newdata, :xyz_with_index) |> Map.delete(:triangles)
+    end
+
+    def transformTrianglePointsInBoxes(data) when is_map(data) do
+        boxes_w_triangles = Enum.filter(data.bboxes, fn {k,v} -> Map.has_key?(v, :triangles) end)
+        for {id, box} <- boxes_w_triangles, into: %{} do
+            ntriangles = for {p1,p2,p3} <- box.triangles, into: [] do
+                np1 = Map.get(data.xyz_with_index, p1)
+                np2 = Map.get(data.xyz_with_index, p2)
+                np3 = Map.get(data.xyz_with_index, p3)
+                {np1, np2, np3}
+            end
+            {id, %{box | triangles: ntriangles}}
+        end
+    end
+end
+
+
+
+
