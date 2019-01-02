@@ -272,5 +272,6 @@
     <ClInclude Include="math\functions\checkered-pattern.h" />
     <ClInclude Include="primitives\square-primitive.h" />
     <ClInclude Include="primitives\cube.h" />
+    <ClInclude Include="json\json.hpp" />
   </ItemGroup>
 </Project>

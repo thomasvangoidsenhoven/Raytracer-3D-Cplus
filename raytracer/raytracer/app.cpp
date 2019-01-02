@@ -10,7 +10,9 @@
 #include "scripting/scripting.h"
 #include "performance/performance.h"
 #include <assert.h>
-
+//#include <iostream>
+#include "json/json.hpp"
+using json = nlohmann::json;
 using namespace raytracer;
 
 namespace
@@ -93,8 +95,22 @@ void process_command_line_arguments(int argc, char** argv)
     parser.register_processor("--studio", enable_3dstudio_output);
 
     parser.process(argc, argv);
+	
+	//testing shenanigans
+	
+	// deserialize from standard input
+	//std::cout << "give json plox" << std::endl;
+	//json j;
+	//std::cin >> j;
 
+	// serialize to standard output
+	//auto output = j["name"];
+	//LOG(INFO) << "name is: " << output;
+
+	//std::cin.get();
+	
     LOG(INFO) << "Terminated successfully";
+	//std::cin.get();
 }
 
 int main(int argc, char** argv)
