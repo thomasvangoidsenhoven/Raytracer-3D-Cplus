@@ -1,13 +1,33 @@
 defmodule Trianglesorter do
     def sort_triangle_arr(triangles, vertices, axis) when is_number(axis) and axis<3 do
         Enum.sort_by(triangles, 
-            fn triangle -> 
-                sorted_triangle_points = Trianglesorter.sort_tp_by_axis(triangle, vertices, axis)
-                first_sorted_point = elem(sorted_triangle_points,0)
-                point_data = Map.get(vertices, first_sorted_point)
-                elem(point_data,axis) |> Float.parse() |> elem(0) 
+            fn triangle ->
+                # Trianglesorter.sort_by_min_point(triangle, vertices, axis)
+                Trianglesorter.sort_by_max_point(triangle, vertices, axis)
+                # Trianglesorter.sort_by_sum_points(triangle, vertices, axis)
             end)
+    end
 
+    def sort_by_min_point(triangle, vertices, axis) do
+        sorted_triangle_points = Trianglesorter.sort_tp_by_axis(triangle, vertices, axis)
+        first_sorted_point = elem(sorted_triangle_points,0)
+        point_data = Map.get(vertices, first_sorted_point)
+        elem(point_data,axis) |> Float.parse() |> elem(0)
+    end
+
+    def sort_by_max_point(triangle, vertices, axis) do
+        sorted_triangle_points = Trianglesorter.sort_tp_by_axis(triangle, vertices, axis)
+        last_sorted_point = elem(sorted_triangle_points,2)
+        point_data = Map.get(vertices, last_sorted_point)
+        elem(point_data,axis) |> Float.parse() |> elem(0)
+    end
+
+    def sort_by_sum_points(triangle, vertices, axis) do
+        sorted_triangle_points = Trianglesorter.sort_tp_by_axis(triangle, vertices, axis)
+        p1 = Map.get(vertices, elem(sorted_triangle_points,0)) |> elem(axis) |> Float.parse() |> elem(0)
+        p2 = Map.get(vertices, elem(sorted_triangle_points,0)) |> elem(axis) |> Float.parse() |> elem(0)
+        p3 = Map.get(vertices, elem(sorted_triangle_points,0)) |> elem(axis) |> Float.parse() |> elem(0)
+        p1 + p2 + p3
     end
 
     def sort_tp_by_axis(triangle, vertices, axis) when is_number(axis) and axis < 3 do
