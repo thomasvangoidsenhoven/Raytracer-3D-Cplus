@@ -8,3 +8,4 @@
 #include "primitives/square-primitive.h"
 #include "primitives/cube.h"
 #include "primitives/boundingbox_primitive.h"
+#include "primitives/triangle-primitive.h"
