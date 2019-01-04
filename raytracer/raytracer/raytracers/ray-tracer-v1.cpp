@@ -19,7 +19,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& sc
 		Material mat = hit.material;
 		// This ray tracer always returns white in case of a hit
 
-		Color hit_color = hit.material->at(hit.local_position).ambient;
+		Color hit_color = compute_ambient(hit.material->at(hit.local_position));
 
 		// The hit object contains the group id, just copy it (group ids are important for edge detection)
 		unsigned group_id = hit.group_id;
@@ -38,6 +38,11 @@ TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& sc
 		// which is basically the same as returning black
 		return TraceResult::no_hit(ray);
 	}
+}
+
+Color raytracer::raytracers::_private_::RayTracerV1::compute_ambient(const MaterialProperties & matProps) const
+{
+	return matProps.ambient;
 }
 
 raytracer::RayTracer raytracer::raytracers::v1()
