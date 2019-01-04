@@ -13,7 +13,7 @@ raytracer::RayTracer raytracer::raytracers::v3()
 	return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::RayTracerV3>());
 }
 
-imaging::Color raytracer::raytracers::_private_::RayTracerV3::process_light_ray(const Scene& scene, const MaterialProperties& material, const Hit& hit, const math::Ray& ray, const LightRay& lightray) const
+imaging::Color raytracer::raytracers::_private_::RayTracerV3::process_light_ray(const Scene& scene, const MaterialProperties& material, const Hit& hit, const math::Ray& ray, const LightRay& lightray) const 
 {
 	Color result = RayTracerV2::process_light_ray(scene, material, hit, ray, lightray);
 	result += compute_specular(material, hit, ray, lightray);

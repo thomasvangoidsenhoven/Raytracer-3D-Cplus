@@ -64,6 +64,7 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
 	BIND(v2);
 	BIND(v3);
 	BIND(v4);
+	BIND(v5);
     BIND(v);
 
 #   undef BIND
