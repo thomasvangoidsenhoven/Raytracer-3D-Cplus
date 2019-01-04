@@ -95,6 +95,7 @@
     <ClCompile Include="primitives\cube.cpp" />
     <ClCompile Include="primitives\boundingbox_primitive.cpp" />
     <ClCompile Include="primitives\triangle-primitive.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -277,5 +278,6 @@
     <ClInclude Include="json\json.hpp" />
     <ClInclude Include="primitives\boundingbox_primitive.h" />
     <ClInclude Include="primitives\triangle-primitive.h" />
+    <ClInclude Include="raytracers\ray-tracer-v5.h" />
   </ItemGroup>
 </Project>

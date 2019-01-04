@@ -40,9 +40,10 @@ TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& sc
 	}
 }
 
-Color raytracer::raytracers::_private_::RayTracerV1::compute_ambient(const MaterialProperties & matProps) const
+Color raytracer::raytracers::_private_::RayTracerV1::compute_ambient(const MaterialProperties& matProps) const
 {
-	return matProps.ambient;
+	Color ambient = matProps.ambient;
+	return ambient;
 }
 
 raytracer::RayTracer raytracer::raytracers::v1()
