@@ -96,6 +96,7 @@
     <ClCompile Include="primitives\boundingbox_primitive.cpp" />
     <ClCompile Include="primitives\triangle-primitive.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v5.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v6.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -279,5 +280,6 @@
     <ClInclude Include="primitives\boundingbox_primitive.h" />
     <ClInclude Include="primitives\triangle-primitive.h" />
     <ClInclude Include="raytracers\ray-tracer-v5.h" />
+    <ClInclude Include="raytracers\ray-tracer-v6.h" />
   </ItemGroup>
 </Project>

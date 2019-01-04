@@ -12,6 +12,10 @@ team_member 'Wannes' do
   extension BoundingBox
   extension Triangle
   
+  extension RayTracerV5
+  
+  extension FisheyeCamera
+  
   extension Mesh
   
 
@@ -30,6 +34,8 @@ team_member 'Thomas' do
   extension Cube
   
   extension ParallelScheduler
+  
+  extension RayTracerV6
   
   extension Mesh
 end

@@ -18,7 +18,8 @@ imaging::Color raytracer::raytracers::_private_::RayTracerV4::process_light_ray(
 	Hit hitted;
 
 	scene.root->find_first_positive_hit(lightRay.ray, &hitted);
-	if (hitted.t >= 0.0 && hitted.t < 1.0) {
+	//1 geeft heel vreemde dingen
+	if (hitted.t >= 0.0 && hitted.t < 0.99) {
 		return colors::black();
 	}
 	

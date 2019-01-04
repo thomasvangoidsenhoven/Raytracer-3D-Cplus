@@ -28,7 +28,7 @@ def scene_at(now)
   var p3 = Pos.spherical(1, degrees(180), degrees(-30))
   var p4 = Pos.spherical(1, degrees(-60), degrees(-30))
 
-  var root = mesh( [ decorate( material(Colors.red()), triangle(p1, p2, p3) ),
+  var root = union( [ decorate( material(Colors.red()), triangle(p1, p2, p3) ),
                      decorate( material(Colors.green()), triangle(p1, p3, p4) ),
                      decorate( material(Colors.blue()), triangle(p1, p4, p2) ),
                      decorate( material(Colors.yellow()), triangle(p2, p4, p3) ) ] )
