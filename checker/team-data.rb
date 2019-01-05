@@ -32,6 +32,7 @@ team_member 'Thomas' do
   extension RayTracerV2
   extension RayTraverV4
   extension Cube
+  extension RandomSampler
   
   extension ParallelScheduler
   

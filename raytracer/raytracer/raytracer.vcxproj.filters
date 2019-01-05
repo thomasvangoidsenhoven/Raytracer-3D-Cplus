@@ -98,6 +98,7 @@
     <ClCompile Include="raytracers\ray-tracer-v5.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v6.cpp" />
     <ClCompile Include="cameras\fisheye-camera.cpp" />
+    <ClCompile Include="samplers\random-sampler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -283,5 +284,6 @@
     <ClInclude Include="raytracers\ray-tracer-v5.h" />
     <ClInclude Include="raytracers\ray-tracer-v6.h" />
     <ClInclude Include="cameras\fisheye-camera.h" />
+    <ClInclude Include="samplers\random-sampler.h" />
   </ItemGroup>
 </Project>
