@@ -1,0 +1,61 @@
+def scene_at(now)
+{
+
+  var camera = Cameras.fisheye( [ "eye": pos(0,0,5),
+                                  "look_at": pos(0,0,0),
+                                  "up": vec(0, 1, 0),
+                                  "horizontal_angle": degrees(270),
+                                  "vertical_angle": degrees(180) ] )
+
+  var white = Materials.uniform( [ "ambient": Colors.white() * 0.1,
+                                   "diffuse": Colors.white() * 0.8,
+                                   "specular": Colors.white(),
+                                   "specular_exponent": 20,
+                                   "reflectivity": 0,
+                                   "transparency": 0,
+                                   "refractive_index": 0 ] )
+
+  var black = Materials.uniform( [ "ambient": Colors.black(),
+                                   "diffuse": Colors.white() * 0.1,
+                                   "specular": Colors.white(),
+                                   "specular_exponent": 20,
+                                   "reflectivity": 0,
+                                   "transparency": 0,
+                                   "refractive_index": 0 ] )
+
+  var checkered = Materials.checkered2d(black, white)
+
+  var spheres   = []
+
+  for_each([-2..5], bind(fun (i, spheres) {
+                     spheres.push_back(translate(vec(-2,0,-i*3), sphere()))
+                     spheres.push_back(translate(vec(2,0,-i*3), sphere()))
+                   }, _, spheres))
+
+  var spheres_union = decorate(white, union(spheres))
+
+  var plane     = decorate(checkered, translate(vec(0,-1,0), xz_plane()))
+
+  var root      = union( [spheres_union, plane] )
+
+  var lights    = [ Lights.omnidirectional( pos(0, 5, 5), Colors.white() ) ]
+
+  return create_scene(camera, root, lights)
+}
+
+
+var anim = scene_animation(scene_at, seconds(5))
+
+var raytracer   = Raytracers.v3()
+
+var renderer    = Renderers.standard( [ "width": 500,
+                                        "height": 500,
+                                        "sampler": Samplers.single(),
+                                        "ray_tracer": raytracer ] )
+
+pipeline( scene_animation(scene_at, seconds(5)),
+          [ Pipeline.animation(30),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )

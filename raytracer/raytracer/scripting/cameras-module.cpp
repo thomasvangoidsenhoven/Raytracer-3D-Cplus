@@ -35,6 +35,23 @@ namespace
 
             return cameras::perspective(eye, look_at, up, distance, aspect_ratio);
         }
+
+		Camera fisheye(const Point3D& eye, const Point3D& lookat, const Vector3D& up,  math::Angle horizontal,  math::Angle vertical) const{
+			return cameras::fisheye(eye, lookat, up, horizontal, vertical);
+		}
+		 Camera fisheye_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
+        {
+            START_ARGUMENTS(argument_map);
+            ARGUMENT(Point3D, eye);
+            ARGUMENT(Point3D, look_at);
+            OPTIONAL_ARGUMENT(Vector3D, up, Vector3D(0, 1, 0));
+            OPTIONAL_ARGUMENT(math::Angle, horizontal_angle,Angle::degrees(360));
+            OPTIONAL_ARGUMENT(math::Angle, vertical_angle,Angle::degrees(360));
+            END_ARGUMENTS();
+
+            return cameras::fisheye(eye, look_at, up, horizontal_angle, vertical_angle);
+        }
+
     };
 }
 
@@ -50,6 +67,7 @@ ModulePtr raytracer::scripting::_private_::create_cameras_module()
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&CameraLibrary::INTERNAL), #EXTERNAL); module->add(fun(&CameraLibrary::INTERNAL ## _by_map), #EXTERNAL)
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)
     BIND(perspective);
+	BIND(fisheye);
 #   undef BIND
 #   undef BIND_AS
 

@@ -97,6 +97,7 @@
     <ClCompile Include="primitives\triangle-primitive.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v5.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v6.cpp" />
+    <ClCompile Include="cameras\fisheye-camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -281,5 +282,6 @@
     <ClInclude Include="primitives\triangle-primitive.h" />
     <ClInclude Include="raytracers\ray-tracer-v5.h" />
     <ClInclude Include="raytracers\ray-tracer-v6.h" />
+    <ClInclude Include="cameras\fisheye-camera.h" />
   </ItemGroup>
 </Project>
