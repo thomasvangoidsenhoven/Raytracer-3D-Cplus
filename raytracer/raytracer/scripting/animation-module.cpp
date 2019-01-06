@@ -19,6 +19,12 @@ namespace
 {
     struct AnimationLibrary
     {
+		template <typename T>
+		inline Animation<T> ease_animation(Animation<T> animation, math::functions::EasingFunction easingFunction) const
+		{
+			return ease(animation, easingFunction);
+		}
+
         Animation<Point3D> point_animation(const Point3D& from, const Point3D& to, Duration duration) const
         {
             return animation::animate(from, to, duration);
@@ -60,6 +66,10 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 #define BIND(NAME)                                  BIND_AS(NAME, NAME)
     BIND_AS(double_animation, animate);
     BIND_AS(point_animation, animate);
+
+	BIND_AS(ease_animation<Point3D>, ease);
+	BIND_AS(ease_animation<double>, ease);
+	BIND_AS(ease_animation<Angle>, ease);
 #undef BIND
 #undef BIND_AS
 

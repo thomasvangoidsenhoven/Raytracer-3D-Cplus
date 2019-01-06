@@ -18,6 +18,10 @@ namespace
         {
             return lights::omnidirectional(position, c);
         }
+		LightSource spotlight(const Point3D& start, const Point3D& finish, const Angle& angle, const Color& c) const
+		{
+		return lights::spot(start, finish, angle, c);
+		}
     };
 }
 
@@ -33,6 +37,7 @@ ModulePtr raytracer::scripting::_private_::create_lights_module()
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&LightLibrary::INTERNAL), #EXTERNAL)
     BIND(omnidirectional);
+	BIND(spotlight);
 #   undef BIND_AS
 #   undef BIND
 

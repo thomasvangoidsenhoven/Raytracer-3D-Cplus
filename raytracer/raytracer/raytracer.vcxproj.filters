@@ -99,6 +99,11 @@
     <ClCompile Include="raytracers\ray-tracer-v6.cpp" />
     <ClCompile Include="cameras\fisheye-camera.cpp" />
     <ClCompile Include="samplers\random-sampler.cpp" />
+    <ClCompile Include="pipeline\ppm-consumer.cpp" />
+    <ClCompile Include="imaging\ppm-format.cpp" />
+    <ClCompile Include="cameras\depth-of-field-camera.cpp" />
+    <ClCompile Include="lights\spot-light.cpp" />
+    <ClCompile Include="math\functions\easing\bounce-easing-function.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -285,5 +290,10 @@
     <ClInclude Include="raytracers\ray-tracer-v6.h" />
     <ClInclude Include="cameras\fisheye-camera.h" />
     <ClInclude Include="samplers\random-sampler.h" />
+    <ClInclude Include="pipeline\ppm-consumer.h" />
+    <ClInclude Include="imaging\ppm-format.h" />
+    <ClInclude Include="cameras\depth-of-field-camera.h" />
+    <ClInclude Include="lights\spot-light.h" />
+    <ClInclude Include="math\functions\easing\bounce-easing-function.h" />
   </ItemGroup>
 </Project>

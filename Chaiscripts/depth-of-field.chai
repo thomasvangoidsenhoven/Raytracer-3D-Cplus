@@ -1,11 +1,15 @@
 def scene_at(now)
 {
+  var lookat = Animations.animate( pos(0,0,0), pos(0,0,-15), seconds(3) )[now]
 
-  var camera = Cameras.fisheye( [ "eye": pos(0,0,5),
-                                  "look_at": pos(0,0,0),
-                                  "up": vec(0, 1, 0),
-                                  "horizontal_angle": degrees(270),
-                                  "vertical_angle": degrees(180) ] )
+
+  var camera = Cameras.depth_of_field( [ "eye": pos(0, 0, 5),
+                                         "look_at": lookat,
+                                         "up": vec(0, 1, 0),
+                                         "distance": 1,
+                                         "aspect_ratio": 1,
+                                         "eye_size": 0.1,
+                                         "eye_sampler": Samplers.single() ] )
 
   var white = Materials.uniform( [ "ambient": Colors.white() * 0.1,
                                    "diffuse": Colors.white() * 0.8,
@@ -44,16 +48,19 @@ def scene_at(now)
 }
 
 
-var anim = scene_animation(scene_at, seconds(5))
+var anim = scene_animation(scene_at, seconds(3))
 
-var raytracer   = Raytracers.v3()
+var raytracer   = Raytracers.v6()
 
 var renderer    = Renderers.standard( [ "width": 500,
                                         "height": 500,
                                         "sampler": Samplers.single(),
                                         "ray_tracer": raytracer ] )
 
-pipeline( scene_animation(scene_at, seconds(5)),
+
+pipeline( anim,
           [ Pipeline.animation(30),
             Pipeline.renderer(renderer),
-            Pipeline.ppm() ] )
+             Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )

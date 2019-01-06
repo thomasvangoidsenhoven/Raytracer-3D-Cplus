@@ -183,6 +183,10 @@ namespace
         {
             return wrap(pipeline::text_writer(std::cout));
         }
+
+		std::shared_ptr<Wrapper> ppm() const {
+			return wrap(pipeline::ppm());
+		}
     };
 
     void pipeline_builder(Boxed_Value initial, const std::vector<Boxed_Value>& pipeline_segments)
@@ -224,12 +228,14 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&PipelineLibrary::INTERNAL), #EXTERNAL)
     BIND(wif);
+	
     BIND(animation);
     BIND(renderer);
     BIND_AS(wif_to_file, wif);
     BIND(null_bitmap_consumer);
     BIND(base64);
     BIND(stdout);
+	BIND(ppm);
 #   undef BIND_AS
 #   undef BIND
 

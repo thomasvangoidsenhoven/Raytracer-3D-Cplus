@@ -36,6 +36,23 @@ namespace
             return cameras::perspective(eye, look_at, up, distance, aspect_ratio);
         }
 
+		Camera depth_of_field(const Point3D& eye, const Point3D& look_at, const Vector3D& up, double distance, double aspect_ratio, double eye_size, Sampler sampler) const {
+			return cameras::depth_of_field_perspective(eye, look_at, up, distance, aspect_ratio, eye_size, sampler);
+		}
+
+		Camera depth_of_field_by_map(const std::map<std::string, Boxed_Value>& argument_map) const {
+
+			START_ARGUMENTS(argument_map);
+			ARGUMENT(Point3D, eye);
+			ARGUMENT(Point3D, look_at);
+			OPTIONAL_ARGUMENT(Vector3D, up, Vector3D(0, 1, 0));
+			OPTIONAL_ARGUMENT(double,distance,1);
+			OPTIONAL_ARGUMENT(double, aspect_ratio, 1);
+			OPTIONAL_ARGUMENT(double, eye_size, 2);
+			OPTIONAL_ARGUMENT(Sampler, eye_sampler, samplers::random(2));
+			END_ARGUMENTS();
+		}
+
 		Camera fisheye(const Point3D& eye, const Point3D& lookat, const Vector3D& up,  math::Angle horizontal,  math::Angle vertical) const{
 			return cameras::fisheye(eye, lookat, up, horizontal, vertical);
 		}
@@ -68,6 +85,7 @@ ModulePtr raytracer::scripting::_private_::create_cameras_module()
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)
     BIND(perspective);
 	BIND(fisheye);
+	BIND(depth_of_field);
 #   undef BIND
 #   undef BIND_AS
 

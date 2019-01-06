@@ -48,15 +48,13 @@
   create_scene(camera, root, lights)
 }
 
-var raytracer   = Raytracers.v5()
+var raytracer   = Raytracers.v6()
 var renderer    = Renderers.standard( [ "width": 250,
                                         "height": 250,
                                         "sampler": Samplers.random(4),
                                         "ray_tracer": raytracer ] )
 
-pipeline( scene_animation(scene_at, seconds(5)),
-          [ Pipeline.animation(30),
+pipeline( scene_animation(scene_at, seconds(3)),
+          [ Pipeline.animation(15),
             Pipeline.renderer(renderer),
-            Pipeline.wif(),
-            Pipeline.base64(),
-            Pipeline.stdout() ] )
+            Pipeline.ppm()] )

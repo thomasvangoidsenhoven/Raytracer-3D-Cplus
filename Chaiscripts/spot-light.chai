@@ -1,0 +1,36 @@
+def scene_at(now)
+{
+  var camera = Cameras.perspective( [ "eye": pos(0,5,10),
+                                      "look_at": pos(0,0,0) ] )
+
+  var material = Materials.uniform( [ "ambient": Colors.white() * 0.1,
+                                      "diffuse": Colors.white() * 0.8,
+                                      "specular": Colors.white(),
+                                      "specular_exponent": 100,
+                                      "reflectivity": 0,
+                                      "transparency": 0,
+                                      "refractive_index": 0 ] )
+
+  var root = decorate(material, union([ translate(vec(0,-1,0),xz_plane()), sphere() ]))
+
+
+
+  var lights = [ Lights.spotlight( pos(-5,0,1), pos(0,0,0), degrees(40), Colors.yellow() )]
+
+
+  create_scene(camera, root, lights)
+}
+
+
+var raytracer   = Raytracers.v6()
+var renderer    = Renderers.standard( [ "width": 500,
+                                        "height": 500,
+                                        "sampler": Samplers.random(2),
+                                        "ray_tracer": raytracer ] )
+                                        
+pipeline( scene_animation(scene_at, seconds(1)),
+          [ Pipeline.animation(1),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )

@@ -13,8 +13,13 @@ def scene_at(now)
 {
 
 
-  var camera = Cameras.perspective( [ "eye": pos(2, 2, 4),
-                                      "look_at": pos(0,0,0) ] )
+  var camera = Cameras.depth_of_field( [ "eye": pos(0, 0, 5),
+                                        "look_at": pos(0,0,0),
+                                         "up": vec(0, 1, 0),
+                                         "distance": 1,
+                                         "aspect_ratio": 1,
+                                         "eye_size": 0.1,
+                                         "eye_sampler": Samplers.random(2) ] )
 
   var square_material = Materials.uniform( [ "ambient": Colors.white() * 0.1,
                                              "diffuse": Colors.white() * 0.8,
@@ -42,7 +47,7 @@ var raytracer   = Raytracers.v4()
 
 var renderer    = Renderers.standard( [ "width": 500,
                                        "height": 500,
-                                       "sampler": Samplers.single(),
+                                       "sampler": Samplers.random(2),
                                        "ray_tracer": raytracer ] )
           
             
