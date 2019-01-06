@@ -11,6 +11,7 @@ namespace
 	public:
 		void perform(std::vector<std::shared_ptr<Task>> tasks) const
 		{
+
 		
 			// [&] capture all variables within scope by reference
 			parallel_for(tasks.size(), [&](int start, int end) {

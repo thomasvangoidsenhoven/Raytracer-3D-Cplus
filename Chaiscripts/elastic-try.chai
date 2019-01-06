@@ -1,0 +1,41 @@
+def material(color)
+{
+  Materials.uniform( [ "ambient": color * 0.1,
+                       "diffuse": color * 0.8,
+                       "specular": Colors.white(),
+                       "specular_exponent": 100,
+                       "reflectivity": 0.5 ] )
+}
+
+def scene_at(now)
+{
+  var camera = Cameras.perspective( [ "eye": pos(0,1,10),
+                                      "look_at": pos(0,5,0) ] )
+
+  var sphere_position1 = Animations.ease( Animations.animate( pos(-3,5,0), pos(-3,0,0), seconds(3) ), Easing.elastic(10, 0) )[now]
+  var sphere_position2 = Animations.ease( Animations.animate( pos(0,5,0), pos(0,0,0), seconds(3) ), Easing.elastic(10, 3) )[now]
+  var sphere_position3 = Animations.ease( Animations.animate( pos(3,5,0), pos(3,0,0), seconds(3) ), Easing.elastic(10, 10) )[now]
+
+  var root = union([ translate(sphere_position1 - pos(0, 0, 0), decorate( material(Colors.red()), sphere()) ),
+                     translate(sphere_position2 - pos(0, 0, 0), decorate( material(Colors.green()), sphere()) ),
+                     translate(sphere_position3 - pos(0, 0, 0), decorate( material(Colors.blue()), sphere()) ) ])
+
+  var lights = [ Lights.omnidirectional( pos(0,5,5), Colors.white() ) ]
+
+
+  create_scene(camera, root, lights)
+}
+
+
+var raytracer   = Raytracers.v6()
+var renderer    = Renderers.standard( [ "width": 500,
+                                        "height": 500,
+                                        "sampler": Samplers.single(),
+                                        "ray_tracer": raytracer ] )
+
+pipeline( scene_animation(scene_at, seconds(3)),
+          [ Pipeline.animation(30),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )

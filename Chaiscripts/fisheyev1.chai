@@ -50,10 +50,12 @@ var raytracer   = Raytracers.v3()
 
 var renderer    = Renderers.standard( [ "width": 500,
                                         "height": 500,
-                                        "sampler": Samplers.single(),
+                                        "sampler": Samplers.random(0),
                                         "ray_tracer": raytracer ] )
 
 pipeline( scene_animation(scene_at, seconds(5)),
           [ Pipeline.animation(30),
             Pipeline.renderer(renderer),
-            Pipeline.ppm() ] )
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )

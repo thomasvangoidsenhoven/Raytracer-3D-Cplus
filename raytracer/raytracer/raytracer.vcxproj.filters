@@ -104,6 +104,8 @@
     <ClCompile Include="cameras\depth-of-field-camera.cpp" />
     <ClCompile Include="lights\spot-light.cpp" />
     <ClCompile Include="math\functions\easing\bounce-easing-function.cpp" />
+    <ClCompile Include="math\functions\easing\elastic-easing-function.cpp" />
+    <ClCompile Include="math\functions\easing\quadratic-function.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -295,5 +297,7 @@
     <ClInclude Include="cameras\depth-of-field-camera.h" />
     <ClInclude Include="lights\spot-light.h" />
     <ClInclude Include="math\functions\easing\bounce-easing-function.h" />
+    <ClInclude Include="math\functions\easing\elastic-easing-function.h" />
+    <ClInclude Include="math\functions\easing\quadratic-function.h" />
   </ItemGroup>
 </Project>

@@ -184,6 +184,22 @@ namespace
 		EasingFunction bounce(int bounces, int absorption) const {
 			return math::functions::easing::bounce(bounces, absorption);
 		}
+
+		EasingFunction elastic(int oscillations, int energyLoss) const {
+			return math::functions::easing::elastic(oscillations, energyLoss);
+		}
+
+		EasingFunction quadratic_in() const {
+			return math::functions::easing::quadratic_in();
+		}
+		EasingFunction quadratic_out() const {
+			return math::functions::easing::quadratic_out();
+		}
+
+		EasingFunction quadratic_in_out() const {
+			return math::functions::easing::quadratic_in_out();
+		}
+
 	};
 
 	void add_easing(Module& module) {
@@ -193,6 +209,10 @@ namespace
 #   define BIND(NAME)  module.add(fun(&EasingLibrary::NAME), #NAME)
 		BIND(linear);
 		BIND(bounce);
+		BIND(elastic);
+		BIND(quadratic_in);
+		BIND(quadratic_out);
+		BIND(quadratic_in_out);
 #   undef BIND
 	}
 }

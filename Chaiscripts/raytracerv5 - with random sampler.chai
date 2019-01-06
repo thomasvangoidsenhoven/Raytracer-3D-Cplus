@@ -51,7 +51,7 @@
 var raytracer   = Raytracers.v6()
 var renderer    = Renderers.standard( [ "width": 250,
                                         "height": 250,
-                                        "sampler": Samplers.random(4),
+                                        "sampler": Samplers.single(),
                                         "ray_tracer": raytracer ] )
 
 pipeline( scene_animation(scene_at, seconds(3)),
