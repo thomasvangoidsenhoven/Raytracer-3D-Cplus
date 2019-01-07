@@ -4,7 +4,6 @@ team_member 'Wannes' do
   extension RayTracerV1
   extension PlaneXZ
   extension SquareXY
-  extension SquareYZ
   extension Scaling
   
   extension RayTracerV3
@@ -13,6 +12,8 @@ team_member 'Wannes' do
   extension Triangle
   
   extension RayTracerV5
+  extension Bounce
+  extension Quadratic
   
   extension FisheyeCamera
   
@@ -32,14 +33,17 @@ team_member 'Thomas' do
   extension RayTracerV2
   extension RayTraverV4
   extension Cube
-  extension RandomSampler
+  extension EasingLibrary
   
   extension ParallelScheduler
+  extension Elastic
+  extension SpotLight
   
   extension RayTracerV6
   
   extension Mesh
 end
+
 
 
 

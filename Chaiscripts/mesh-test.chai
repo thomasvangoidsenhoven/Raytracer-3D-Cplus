@@ -1,0 +1,52 @@
+def material(c)
+{
+  Materials.uniform( [ "ambient": Colors.white() * 0.1,
+                       "diffuse": c * 0.8,
+                       "specular": Colors.white() * 0.5,
+                       "specular_exponent": 10,
+                       "reflectivity": 0.0,
+                       "transparency": 0,
+                       "refractive_index": 0 ] )
+}
+
+def scene_at(now)
+{
+
+
+  var camera = Cameras.perspective( [ "eye": pos(0, 0, 5),
+                                        "look_at": pos(0,0,0)
+                                          ] )
+
+  var square_material = Materials.uniform( [ "ambient": Colors.white() * 0.1,
+                                             "diffuse": Colors.white() * 0.8,
+                                             "specular": Colors.white() * 0.5,
+                                             "specular_exponent": 10,
+                                             "reflectivity": 0.5] )
+
+
+  var p1 = Pos.spherical(1, degrees(0), degrees(90))
+  var p2 = Pos.spherical(1, degrees(60), degrees(-30))
+  var p3 = Pos.spherical(1, degrees(180), degrees(-30))
+  var p4 = Pos.spherical(1, degrees(-60), degrees(-30))
+
+  var root = union( [ decorate( material(Colors.green()), load_mesh("C:\\Users\\Thomas\\Desktop\\3d 2019\\3dcg1819-team\\Chaiscripts\\bunnyOp.json") ) ] )
+
+  var lights = [ Lights.omnidirectional( pos(0, 5, 0), Colors.white() ), Lights.omnidirectional( pos(0, -5, 0), Colors.white() ) ]
+
+  create_scene(camera, root, lights)
+}
+
+var raytracer   = Raytracers.v4()
+
+var renderer    = Renderers.standard( [ "width": 500,
+                                       "height": 500,
+                                       "sampler": Samplers.single(),
+                                       "ray_tracer": raytracer ] )
+          
+            
+pipeline( scene_animation(scene_at, seconds(3)),
+          [ Pipeline.animation(30),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )

@@ -9,3 +9,5 @@
 #include "primitives/cube.h"
 #include "primitives/boundingbox_primitive.h"
 #include "primitives/triangle-primitive.h"
+#include "primitives/mesh-primitive.h"
+#include "primitives/mesh-reader.h"

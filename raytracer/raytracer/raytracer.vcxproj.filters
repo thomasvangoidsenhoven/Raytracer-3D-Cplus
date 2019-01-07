@@ -106,6 +106,8 @@
     <ClCompile Include="math\functions\easing\bounce-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\elastic-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\quadratic-function.cpp" />
+    <ClCompile Include="primitives\mesh-primitive.cpp" />
+    <ClCompile Include="primitives\mesh-reader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -299,5 +301,7 @@
     <ClInclude Include="math\functions\easing\bounce-easing-function.h" />
     <ClInclude Include="math\functions\easing\elastic-easing-function.h" />
     <ClInclude Include="math\functions\easing\quadratic-function.h" />
+    <ClInclude Include="primitives\mesh-primitive.h" />
+    <ClInclude Include="primitives\mesh-reader.h" />
   </ItemGroup>
 </Project>

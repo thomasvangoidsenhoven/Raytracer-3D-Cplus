@@ -23,6 +23,10 @@ namespace
 
         return primitives::make_union(children);
     }
+
+	Primitive load_mesh(string path) {
+		return primitives::MeshReader().read_mesh(path);
+	}
 }
 
 ModulePtr raytracer::scripting::_private_::create_primitives_module()
@@ -49,6 +53,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
 	BIND_DIRECTLY(yz_square);
 	BIND_DIRECTLY(triangle);
 	BIND_DIRECTLY(cube);
+	BIND_HELPER_FUNCTION_AS(load_mesh,load_mesh);
     BIND_HELPER_FUNCTION_AS(make_union, union);
     BIND_DIRECTLY(decorate);
     BIND_DIRECTLY(translate);
