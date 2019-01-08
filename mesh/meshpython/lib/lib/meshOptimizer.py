@@ -37,9 +37,9 @@ def loop(boxes, tasks, vertices):
 def replaceTrianglePoints(arr, vertices):
     new_arr = []
     for t in arr:
-        p1 = [str(vertices[t[0]][0]), str(vertices[t[0]][1]), str(vertices[t[0]][2])]
-        p2 = [str(vertices[t[1]][0]), str(vertices[t[1]][1]), str(vertices[t[1]][2])]
-        p3 = [str(vertices[t[2]][0]), str(vertices[t[2]][1]), str(vertices[t[2]][2])]
+        p1 = [(vertices[t[0]][0]), (vertices[t[0]][1]), (vertices[t[0]][2])]
+        p2 = [(vertices[t[1]][0]), (vertices[t[1]][1]), (vertices[t[1]][2])]
+        p3 = [(vertices[t[2]][0]), (vertices[t[2]][1]), (vertices[t[2]][2])]
         new_arr.append([p1, p2, p3])
     return new_arr
 
