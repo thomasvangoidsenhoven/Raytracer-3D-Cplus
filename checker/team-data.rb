@@ -4,22 +4,20 @@ team_member 'Wannes' do
   extension RayTracerV1
   extension PlaneXZ
   extension SquareXY
-  extension Scaling
   
   extension RayTracerV3
   extension MaterialCheckered2D
   extension BoundingBox
   extension Triangle
-  
-  extension RayTracerV5
+
+
   extension Bounce
   extension Quadratic
+  extension RayTracerV5
   
   extension FisheyeCamera
   
   extension Mesh
-  
-
 end
 
 team_member 'Thomas' do
@@ -29,9 +27,8 @@ team_member 'Thomas' do
   extension PlaneYZ
   extension SquareXZ
   
-  extension VerticalLines
   extension RayTracerV2
-  extension RayTraverV4
+  extension RayTracerV4
   extension Cube
   extension EasingLibrary
   
@@ -39,13 +36,11 @@ team_member 'Thomas' do
   extension Elastic
   extension SpotLight
   
+  
   extension RayTracerV6
   
   extension Mesh
 end
-
-
-
 
 
 

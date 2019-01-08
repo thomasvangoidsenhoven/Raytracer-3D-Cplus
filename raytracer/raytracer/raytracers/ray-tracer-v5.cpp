@@ -1,4 +1,6 @@
 #include "ray-tracer-v5.h"
+#include "easylogging++.h"
+
 using namespace std;
 
 TraceResult raytracer::raytracers::_private_::RayTracerV5::trace(const Scene & scene, const Ray & ray) const

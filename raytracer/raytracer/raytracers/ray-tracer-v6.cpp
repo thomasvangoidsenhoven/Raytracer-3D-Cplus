@@ -1,4 +1,5 @@
 #include "ray-tracer-v6.h"
+#include "easylogging++.h"
 using namespace std;
 
 //identical to v5, except you also add compute_refraction to the result

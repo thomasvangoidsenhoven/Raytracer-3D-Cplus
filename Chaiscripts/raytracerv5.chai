@@ -18,12 +18,7 @@
 
   var ceiling_material = floor_material
 
-  var sphere_material = Materials.uniform( [ "ambient": Colors.blue() * 0.1,
-                                             "diffuse": Colors.blue() * 0.8,
-                                             "specular": Colors.white() * 0.8,
-                                             "specular_exponent": 10,
-                                             "transparency": 0.7,
-                                             "refractive_index": 2.5 ] )
+ 
 
   var small_sphere_material = Materials.uniform( [ "ambient": Colors.white() * 0.1,
                                                    "diffuse": Colors.white() * 0.8,
@@ -48,7 +43,7 @@
   create_scene(camera, root, lights)
 }
 
-var raytracer   = Raytracers.v5()
+var raytracer   = Raytracers.v6()
 var renderer    = Renderers.standard( [ "width": 500,
                                         "height": 500,
                                         "sampler": Samplers.single(),
@@ -57,4 +52,6 @@ var renderer    = Renderers.standard( [ "width": 500,
 pipeline( scene_animation(scene_at, seconds(5)),
           [ Pipeline.animation(30),
             Pipeline.renderer(renderer),
-            Pipeline.ppm() ] )
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )  

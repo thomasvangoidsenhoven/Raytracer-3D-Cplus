@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 global mesh = load_mesh("D:\\optimized2.json")
+=======
+global mesh = load_mesh("C:\\Users\\Thomas\\Desktop\\3D 2019\\3dcg1819-team\\mesh\\meshpython\\lib\\bunnyOP2.json")
+>>>>>>> da2b4b85520619c70e08ea151d0d35e41aad778d
 
 def material(c)
 {

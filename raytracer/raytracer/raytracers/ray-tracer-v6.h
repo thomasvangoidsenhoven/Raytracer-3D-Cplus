@@ -11,7 +11,7 @@ namespace raytracer
 			{
 			public:
 				//override v5
-				TraceResult trace(const Scene& scene, const Ray& ray, double weight)const;
+				TraceResult trace(const Scene& scene, const Ray& ray, double weight)const override;
 			protected:
 				imaging::Color compute_refraction(const Scene& scene, const MaterialProperties& matProps, const Hit& hit, const Ray& ray, double weight)const;
 			};

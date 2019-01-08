@@ -45,19 +45,19 @@ namespace {
 			}
 
 			Box bounding_box() const override {
-				//SHOULD JUST RETURN THE FIRST ELEMENT (biggest box)
+				
 
 				//test
 				//get bounding box of first triangle.
-				Box smallbox = triangles.at(0)->bounding_box();
+				Box box = triangles.at(0)->bounding_box();
 
 				//group all boxes until you end up with on single box
 				for each (Primitive p in triangles)
 				{
-					smallbox = smallbox.merge(p->bounding_box());
+					box = box.merge(p->bounding_box());
 				}
 
-				return smallbox;
+				return box;
 			}
 
 

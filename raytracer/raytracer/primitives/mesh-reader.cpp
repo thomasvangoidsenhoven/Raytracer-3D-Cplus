@@ -77,6 +77,16 @@ Primitive raytracer::primitives::MeshReader::read_mesh(std::string path)
 		LOG(INFO) << "Mission failed, We'll get em next time!";
 	}
 
+	for (int i = 0; i < strings.size(), i++;) 
+	{
+		string test = strings[i];
+		if ( test.at(0) == 't' ){
+			string newString;
+			
+		}
+		
+	}
+
 
 	Primitive mesh = primitives::mesh(triangles, boxes);
 	return mesh;
