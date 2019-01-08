@@ -1,4 +1,4 @@
- def scene_at(now)
+def scene_at(now)
 {
   var camera = Cameras.perspective( [ "eye": pos(0,0,5),
                                       "look_at": pos(0,0,0) ] )
@@ -18,7 +18,12 @@
 
   var ceiling_material = floor_material
 
- 
+  var sphere_material = Materials.uniform( [ "ambient": Colors.blue() * 0.1,
+                                             "diffuse": Colors.blue() * 0.8,
+                                             "specular": Colors.white() * 0.8,
+                                             "specular_exponent": 10,
+                                             "transparency": 0.7,
+                                             "refractive_index": 2.5 ] )
 
   var small_sphere_material = Materials.uniform( [ "ambient": Colors.white() * 0.1,
                                                    "diffuse": Colors.white() * 0.8,
@@ -33,7 +38,10 @@
   primitives.push_back( translate(vec(0,0,-2), decorate(back_wall_material, xy_plane())) )
 
 
-
+  var sphere_position = Animations.circular( [ "position": pos(0,0,1),
+                                               "around": pos(0,0,0),
+                                               "duration": seconds(5) ] )
+  primitives.push_back( decorate( sphere_material, translate(sphere_position[now] - pos(0,0,0), scale(0.5, 0.5, 0.5, sphere())) ) )
   primitives.push_back( decorate( small_sphere_material, scale(0.25, 0.25, 0.25, sphere()) ) )
 
   var root = union(primitives)
@@ -48,10 +56,11 @@ var renderer    = Renderers.standard( [ "width": 500,
                                         "height": 500,
                                         "sampler": Samplers.single(),
                                         "ray_tracer": raytracer ] )
+                                        
 
 pipeline( scene_animation(scene_at, seconds(5)),
           [ Pipeline.animation(30),
             Pipeline.renderer(renderer),
             Pipeline.wif(),
             Pipeline.base64(),
-            Pipeline.stdout() ] )  
+            Pipeline.stdout() ] )                                        
