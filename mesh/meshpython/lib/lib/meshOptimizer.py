@@ -28,7 +28,7 @@ def loop(boxes, tasks, vertices):
             task2 = {"id": current_id + 2, "parent": first_task["id"], "triangles": sorted[med:]}
             tasks.append(task1)
             tasks.append(task2)
-            newbox = {"id": first_task["id"], "parent": first_task["parent"]}
+            newbox = {"id": first_task["id"], "parent": first_task["parent"], "children": [current_id+1, current_id+2]}
             boxes[first_task["id"]] = newbox
             #return loop(boxes, tasks, vertices)
             continue
