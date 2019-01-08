@@ -2,6 +2,10 @@
 #include "easylogging++.h"
 #include "primitives\primitives.h"
 #include "json/json.hpp"
+#include <iostream>
+#include <iostream>
+#include <string>
+#include <regex>
 
 using namespace std;
 using nlohmann::json;
@@ -11,90 +15,69 @@ Primitive raytracer::primitives::MeshReader::read_mesh(std::string path)
 	vector<Primitive> triangles;
 	vector<Primitive> boxes;
 
+	vector<string> strings;
+	vector<Primitive> queue;
+
 	ifstream file(path);
 	if (file.is_open()) {
-
-
-		json json;
-		file >> json;
-
-		LOG(INFO) << "JSON SIZE" << json.size();
-		int count = 0;
-		// range-based for triangles
-		for (auto& element : json) {
-			if (!element["triangles"].is_null()) {
-				for (auto& triangle : element["triangles"]) {
-					count++;
-
-					auto puntA = triangle[0];
-					string aXs = puntA[0];
-					double aX;
-					stringstream(aXs) >> aX;
-					string aYs = puntA[1];
-					double aY;
-					stringstream(aYs) >> aY;
-					string aZs = puntA[2];
-					double aZ;
-					stringstream(aYs) << aZ;
-					Point3D a(aX,aY,aZ);
-					
-
-					auto puntB = triangle[0];
-					string bXs = puntB[0];
-					double bX;
-					stringstream(bXs) >> bX;
-					string bYs = puntB[1];
-					double bY;
-					stringstream(bYs) >> bY;
-					string bZs = puntB[2];
-					double bZ;
-					stringstream(bYs) << bZ;
-					Point3D b(bX, bY, bZ);
-
-
-					auto puntC = triangle[0];
-					string cXs = puntC[0];
-					double cX;
-					stringstream(cXs) >> cX;
-					string cYs = puntC[1];
-					double cY;
-					stringstream(cYs) >> cY;
-					string cZs = puntC[2];
-					double cZ;
-					stringstream(cZs) << cZ;
-					Point3D c(cX, cY, cZ);
-				
-					triangles.push_back(primitives::triangle(a, b, c));
-				}
-			}
-			
+		string line;
+		while (file.good()) {
+			getline(file, line);
+			strings.push_back(line);
 		}
+		LOG(INFO) << strings[0];
+		LOG(INFO) << strings.size();
 
-		LOG(INFO) << "Amount of triangles: " << count;
+		auto boxes = 0;
+		auto triangles = 0;
+		vector<Primitive> triangle_queue;
+		for (int i = 0; i < strings.size(); i++)
+		{
+			string test = strings[i];
+			if (test.find("triangle") != std::string::npos) {
+				vector<double> points;
+				std::regex r("^triangle\\\s\\[\\[([-\\d.]*)\\\s([-\\d.]*)\\\s([-\\d.]*)\\],\\[([-\\d.]*)\\\s([-\\d.]*)\\\s([-\\d.]*)\\],\\[([-\\d.]*)\\\s([-\\d.]*)\\\s([-\\d.]*)\\]\\]"); // entire match will be 2 numbers
+				std::smatch m;
+				std::regex_search(test, m, r);
+				for (auto v : m) {
+					double x = 0;
+					istringstream s(v);
+					s >> x;
+					points.push_back(x);
+				}
 
-
-
-		//  crashes 3D studio string input = string((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
-		//test create pyramid
-				//ay thats pretty good
-				/*Point3D p1 = Point3D::spherical(1, Angle::degrees(0),Angle::degrees(90));
-				Point3D p2 = Point3D::spherical(1, Angle::degrees(60), Angle::degrees(-30));
-				Point3D p3 = Point3D::spherical(1, Angle::degrees(180), Angle::degrees(-30));
-				Point3D p4 = Point3D::spherical(1, Angle::degrees(-60), Angle::degrees(-30));
-				Primitive t1 = primitives::triangle(p1, p2, p3);
-				Primitive t2 = primitives::triangle(p1, p3, p4);
-				Primitive t3 = primitives::triangle(p1, p4, p2);
-				Primitive t4 = primitives::triangle(p2, p2, p3);
-				triangles.push_back(t1);
-				triangles.push_back(t2);
-				triangles.push_back(t3);
-				triangles.push_back(t4);*/
+				try {
+				Point3D a(points[1],points[2],points[3]);
+				//LOG(INFO) << "a is " << points[1] << points[2] << points[3];
+				Point3D b(points[4], points[5], points[6]);
+				//LOG(INFO) << "b is " << points[4]<< points[5]<< points[6];
+				Point3D c(points[7], points[8], points[9]);
+				//LOG(INFO) << "c is " << points[7]<< points[8]<< points[9];
+				
+					Primitive p = primitives::triangle(a, b, c);
+				}
+				catch (...) {
+					LOG(INFO) << "a is " << points[1] << points[2] << points[3];
+					LOG(INFO) << "b is " << points[4]<< points[5]<< points[6];
+					LOG(INFO) << "c is " << points[7]<< points[8]<< points[9];
+				}
+				
+				//triangle_queue.push_back(p);
+			}
+			if (test.find("box") != std::string::npos) {
+				triangle_queue = vector<Primitive>();
+				boxes++;
+			}
+		}
+		//LOG(INFO) << "triangle queue size" <<  triangle_queue.size();
+		LOG(INFO) << boxes;
+		//LOG(INFO) << triangles;
 	}
 	else {
 		LOG(INFO) << "Mission failed, We'll get em next time!";
 	}
 
 
-	Primitive mesh = primitives::mesh(triangles,boxes);
+	Primitive mesh = primitives::mesh(triangles, boxes);
 	return mesh;
 }
