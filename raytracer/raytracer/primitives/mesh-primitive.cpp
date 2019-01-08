@@ -10,10 +10,9 @@ using namespace math;
 namespace {
 	class MeshImplementation : public primitives::_private_::PrimitiveImplementation {
 		public:
-			vector<Primitive> triangles;
-			vector<Primitive> boxes;
+			Primitive triangles;
 
-			MeshImplementation(const vector<Primitive>& triangles, const vector<Primitive>& boxes) : triangles(triangles),boxes(boxes) {
+			MeshImplementation(const Primitive& triangles) : triangles(triangles) {
 				LOG(INFO) << "Starting Construction";
 
 				//test create pyramid
@@ -34,37 +33,23 @@ namespace {
 
 			vector<shared_ptr<Hit>> find_all_hits(const Ray& ray) const override {
 				vector<shared_ptr<Hit>> hits;
-				for each (Primitive p in triangles) {
-					//TODO optimized triangle
-					Hit hit;
-					p->find_first_positive_hit(ray,&hit);
-
-					hits.push_back(make_shared<Hit>(hit));
-				}
+				Hit hit;
+				triangles->find_first_positive_hit(ray, &hit);
+				hits.push_back(make_shared<Hit>(hit));
 				return hits;
 			}
 
 			Box bounding_box() const override {
 				
 
-				//test
-				//get bounding box of first triangle.
-				Box box = triangles.at(0)->bounding_box();
-
-				//group all boxes until you end up with on single box
-				for each (Primitive p in triangles)
-				{
-					box = box.merge(p->bounding_box());
-				}
-
-				return box;
+				return triangles->bounding_box();
 			}
 
 
 	};
 }
 
-Primitive raytracer::primitives::mesh(const vector<Primitive>& triangles, const vector<Primitive>& boxes)
+Primitive raytracer::primitives::mesh(const Primitive& triangles)
 {
-	return Primitive(make_shared<MeshImplementation>(triangles,boxes));
+	return Primitive(make_shared<MeshImplementation>(triangles));
 }
