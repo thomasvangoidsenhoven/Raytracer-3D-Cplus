@@ -1,7 +1,7 @@
 from decimal import Decimal
 
 
-def read_values(filename="bunny.mesh"):
+def read_values(filename="D:\\bunny.mesh"):
     f = open(filename, "r")
     counter = 0
     status = "start"
