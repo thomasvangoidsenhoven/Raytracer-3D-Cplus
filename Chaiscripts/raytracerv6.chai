@@ -38,10 +38,7 @@ def scene_at(now)
   primitives.push_back( translate(vec(0,0,-2), decorate(back_wall_material, xy_plane())) )
 
 
-  var sphere_position = Animations.circular( [ "position": pos(0,0,1),
-                                               "around": pos(0,0,0),
-                                               "duration": seconds(5) ] )
-  primitives.push_back( decorate( sphere_material, translate(sphere_position[now] - pos(0,0,0), scale(0.5, 0.5, 0.5, sphere())) ) )
+  primitives.push_back( decorate( sphere_material, translate(vec(1,0,0), scale(0.5, 0.5, 0.5, sphere())) ) )
   primitives.push_back( decorate( small_sphere_material, scale(0.25, 0.25, 0.25, sphere()) ) )
 
   var root = union(primitives)

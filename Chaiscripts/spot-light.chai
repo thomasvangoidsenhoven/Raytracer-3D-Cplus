@@ -25,7 +25,7 @@ def scene_at(now)
 var raytracer   = Raytracers.v6()
 var renderer    = Renderers.standard( [ "width": 500,
                                         "height": 500,
-                                        "sampler": Samplers.random(2),
+                                        "sampler": Samplers.single(),
                                         "ray_tracer": raytracer ] )
                                         
 pipeline( scene_animation(scene_at, seconds(1)),

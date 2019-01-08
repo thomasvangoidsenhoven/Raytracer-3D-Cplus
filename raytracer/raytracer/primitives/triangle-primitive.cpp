@@ -39,14 +39,7 @@ namespace raytracer {
 				return hits;
 			}
 
-			bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
-			{
-				auto hits = this->find_all_hits(ray);
-				if (hits.size() == 0)return false;
-				hits[0].get();
-				return true;
-				
-			}
+			
 
 			Box bounding_box() const override {
 				auto minX = min(min(a.x(), b.x()), c.x());

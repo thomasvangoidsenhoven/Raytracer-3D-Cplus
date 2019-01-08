@@ -1,7 +1,7 @@
 import json
 
 
-def writeJson(data, outfile="D:\\optimized2.json"):
+def writeJson(data, outfile="C:\\Users\\Thomas\\Desktop\\3D 2019\\3dcg1819-team\\mesh\\meshpython\\lib\\bunnyOP2.json"):
     arr = make_array(data)
     arr.reverse()
     file = open(outfile, "w")

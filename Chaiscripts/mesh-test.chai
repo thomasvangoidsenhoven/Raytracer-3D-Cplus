@@ -1,4 +1,4 @@
-global mesh = load_mesh("C:\\Users\\Thomas\\Desktop\\3D 2019\\3dcg1819-team\\Chaiscripts\\bunnyOp.json")
+global mesh = load_mesh("C:\\Users\\Thomas\\Desktop\\3D 2019\\3dcg1819-team\\mesh\\meshpython\\lib\\bunnyOP2.json")
 
 def material(c)
 {

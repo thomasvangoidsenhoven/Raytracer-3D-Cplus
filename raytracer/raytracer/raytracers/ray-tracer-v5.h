@@ -13,7 +13,7 @@ namespace raytracer
 					//override original (v0 method)
 					TraceResult trace(const Scene& scene, const Ray& ray) const override;
 
-					TraceResult trace(const Scene& scene, const Ray& ray, double weight)const;
+					virtual TraceResult trace(const Scene& scene, const Ray& ray, double weight)const;
 				protected:
 					Color compute_reflection(const Scene& scene, const MaterialProperties& matProps, const Hit& hit, const Ray& ray, double weight) const;
 			};
