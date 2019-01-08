@@ -1,3 +1,5 @@
+global mesh = load_mesh("C:\\Users\\Thomas\\Desktop\\3d 2019\\3dcg1819-team\\Chaiscripts\\bunnyOp.json")
+
 def material(c)
 {
   Materials.uniform( [ "ambient": Colors.white() * 0.1,
@@ -29,7 +31,7 @@ def scene_at(now)
   var p3 = Pos.spherical(1, degrees(180), degrees(-30))
   var p4 = Pos.spherical(1, degrees(-60), degrees(-30))
 
-  var root = union( [ decorate( material(Colors.green()), load_mesh("C:\\Users\\Thomas\\Desktop\\3d 2019\\3dcg1819-team\\Chaiscripts\\bunnyOp.json") ) ] )
+  var root = union( [ decorate( material(Colors.green()), mesh ) ] )
 
   var lights = [ Lights.omnidirectional( pos(0, 5, 0), Colors.white() ), Lights.omnidirectional( pos(0, -5, 0), Colors.white() ) ]
 
