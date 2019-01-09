@@ -13,13 +13,13 @@ def optimize(data):
 def loop(boxes, tasks, vertices):
     while len(tasks) > 0:
         first_task = tasks.pop(0)
-        if len(first_task["triangles"]) < 150:
+        if len(first_task["triangles"]) < 10:
             new_t = replaceTrianglePoints(first_task["triangles"], vertices)
             returnbox = {"id": first_task["id"], "parent": first_task["parent"], "triangles": new_t}
             boxes[first_task["id"]] = returnbox
             #return loop(boxes, tasks, vertices)
             continue
-        elif len(first_task["triangles"]) > 150:
+        elif len(first_task["triangles"]) > 10:
             axis = findLongestAxis(first_task["triangles"], vertices)
             sorted = sortTriangleArray(first_task["triangles"], axis, vertices)
             current_id = len(tasks) + len(boxes) + 1

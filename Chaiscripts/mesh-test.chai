@@ -31,14 +31,14 @@ def scene_at(now)
   var p3 = Pos.spherical(1, degrees(180), degrees(-30))
   var p4 = Pos.spherical(1, degrees(-60), degrees(-30))
 
-  var root = union( [ decorate( material(Colors.green()), mesh ) ] )
+  var root = union( [ decorate( material(Colors.yellow()), mesh ) ] )
 
   var lights = [ Lights.omnidirectional( pos(0, 5, 0), Colors.white() ), Lights.omnidirectional( pos(0, -5, 0), Colors.white() ) ]
 
   create_scene(camera, root, lights)
 }
 
-var raytracer   = Raytracers.v4()
+var raytracer   = Raytracers.v6()
 
 var renderer    = Renderers.standard( [ "width": 500,
                                        "height": 500,

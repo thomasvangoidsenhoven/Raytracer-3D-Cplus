@@ -9,7 +9,7 @@ team_member 'Wannes' do
   extension MaterialCheckered2D
   extension BoundingBox
   extension Triangle
-
+  extension RandomSampler
 
   extension Bounce
   extension Quadratic
@@ -31,11 +31,11 @@ team_member 'Thomas' do
   extension RayTracerV4
   extension Cube
   extension EasingLibrary
+  extension MaterialVerticalLines
   
   extension ParallelScheduler
   extension Elastic
   extension SpotLight
-  
   
   extension RayTracerV6
   
